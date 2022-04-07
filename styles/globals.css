@@ -1,0 +1,114 @@
+HTML {
+  /* background-image: url("/assets/images/Bkci_8qcdvQ.jpeg"); */
+  background-color     : lightgrey;
+  background-attachment: fixed;
+  background-size      : cover;
+  color                : #fff !important;
+}
+
+.navbar {
+  color         : #fff !important;
+  text-shadow   : 1px 1px 10px #000000;
+  padding-bottom: 4px;
+  padding-left  : 10px;
+  padding-right : 10px;
+}
+
+.navbar-shadow {
+  box-shadow      : 0 0 10px rgb(0 0 0 / 50%);
+  color           : #fff !important;
+  text-shadow     : 1px 1px 10px #000000;
+  background-color: rgb(0 0 0 / 15%);
+  padding-bottom  : 4px;
+  padding-left    : 10px;
+  padding-right   : 10px;
+}
+
+.centered {
+  text-align: center;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.app-container {
+  position: fixed;
+  top     : 40px;
+  bottom  : 40px;
+  width   : 350px;
+  height  : auto;
+  overflow: auto;
+}
+
+.fixed-left {
+  left: 0;
+}
+
+.fixed-right {
+  right: 0;
+}
+
+.app-container.fixed-left {
+  text-align: left;
+}
+
+.app-container.fixed-right {
+  text-align: right;
+}
+
+.app-container {
+  /* padding-left : 5px;
+  padding-right: 5px; */
+}
+
+.app-container>* {
+  color: rgb(255 255 255 / 25%) !important;
+}
+
+.app-container:hover>* {
+  color           : rgb(255 255 255 / 100%) !important;
+  box-shadow      : 0 0 10px rgb(0 0 0 / 50%);
+  color           : #fff !important;
+  text-shadow     : 1px 1px 10px #000000;
+  background-color: rgb(0 0 0 / 50%);
+}
+
+.app-container button,
+.app-container input {
+  opacity: 0.5;
+}
+
+.app-container:hover button:not(:hover),
+.app-container:hover input:not(:hover) {
+  opacity: 1;
+}
+
+.centered {
+  text-align: center;
+}
+
+.spacious {
+  padding-top   : 1rem;
+  padding-bottom: 1rem;
+}
+
+.lined-out {
+  width: 100%;
+}
+
+.find-me {
+  border: solid 1px red;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
