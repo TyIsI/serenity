@@ -5,9 +5,11 @@ import 'bootstrap/dist/css/bootstrap.css'
 import '../styles/globals.css'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { fab } from '@fortawesome/free-brands-svg-icons'
 
-library.add(fas, faPlus)
+library.add(fas)
+library.add(fab)
 
 function App ({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />
