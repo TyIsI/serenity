@@ -10,6 +10,7 @@ import PhotoTemplate from 'lib/unsplash/templates/PhotoTemplate'
 
 import ToDoList from 'apps/ToDoList/ToDoList'
 import Bookmarks from 'apps/Bookmarks/Bookmarks'
+import SourceCredit from 'components/SourceCredit/SourceCredit'
 
 FrontendService.start()
 
@@ -47,7 +48,7 @@ const Serenity: NextPage = () => {
 
         <Row className={classnames(['navbar', 'fixed-bottom'])}>
           <Col className="align-left">
-            <a href="https://github.com/TyIsI/serenity" target={'_blank'} rel="noreferrer">Serenity Dashboard</a>
+            <SourceCredit />
           </Col>
           <Col className="centered">
             Bottom Navbar
