@@ -36,6 +36,31 @@ HTML {
   text-align: right;
 }
 
+.main-container {
+  position      : fixed;
+  top           : 40px;
+  bottom        : 40px;
+  left          : 350px;
+  right         : 350px;
+  height        : auto;
+  width         : auto;
+  overflow      : auto;
+  text-align    : middle;
+  vertical-align: middle;
+}
+
+.pivot {
+  position      : absolute;
+  top           : 50%;
+  left          : 50%;
+  width         : 512px;
+  height        : 150px;
+  margin        : auto;
+  text-align    : center;
+  vertical-align: middle;
+  transform     : translate(-50%, -50%);
+}
+
 .app-container {
   position: fixed;
   top     : 40px;
@@ -101,14 +126,14 @@ HTML {
   width: 100%;
 }
 
-.find-me {
-  border: solid 1px red;
-}
-
 .pull-left {
   float: left;
 }
 
 .pull-right {
   float: right;
+}
+
+.find-me {
+  border: solid 1px #00ff00;
 }
