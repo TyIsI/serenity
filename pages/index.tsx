@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import type { NextPage } from 'next'
 import { Col, Container, Row } from 'react-bootstrap'
 import classnames from 'classnames'
-
-import FrontendService from '../lib/unsplash/services/frontend/index'
-import UnsplashCredit from 'components/UnsplashCredit/UnsplashCredit'
 import { Random } from 'unsplash-js/dist/methods/photos/types'
+
+import Clock from 'components/Clock/Clock'
+import UnsplashCredit from 'components/UnsplashCredit/UnsplashCredit'
+import FrontendService from 'lib/unsplash/services/frontend/index'
 import PhotoTemplate from 'lib/unsplash/templates/PhotoTemplate'
 
 import ToDoList from 'apps/ToDoList/ToDoList'
@@ -29,7 +30,7 @@ const Serenity: NextPage = () => {
             <span onClick={() => toggleTodo(!showTodo)}>Todo</span>
           </Col>
           <Col className="centered">
-            Middle Col
+            <Clock />
           </Col>
           <Col className="align-right">
             <span onClick={() => toggleBookmarks(!showBookmarks)}>Bookmarks</span>
@@ -37,11 +38,14 @@ const Serenity: NextPage = () => {
         </Row>
 
         <Row>
-          <Col className="app-container fixed-left">
+          <Col className="app-container fixed-left" xs={4}>
             {showTodo && (<ToDoList />)}
           </Col>
-          <Col></Col>
-          <Col className="app-container fixed-right">
+          <Col className="main-container">
+            <div className="pivot">
+            </div>
+          </Col>
+          <Col className="app-container fixed-right" xs={4}>
             {showBookmarks && (<Bookmarks />)}
           </Col>
         </Row>
