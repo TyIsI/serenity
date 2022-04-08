@@ -5,9 +5,10 @@ import { ClockProps } from './Clock.d'
 
 const renderTime = () => {
   const date = new Date()
-  const hours = date.getHours()
-  const minutes = date.getMinutes()
-  const seconds = date.getSeconds()
+
+  const hours = ('' + date.getHours()).padStart(2, '0')
+  const minutes = ('' + date.getMinutes()).padStart(2, '0')
+  const seconds = ('' + date.getSeconds()).padStart(2, '0')
 
   return `${hours}:${minutes}:${seconds}`
 }
