@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import BackendService from 'lib/unsplash/services/backend/index'
+import BackendService from 'src/unsplash/backend/services/backend'
 
 type Data = {
   ts: number,

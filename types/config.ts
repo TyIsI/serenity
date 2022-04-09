@@ -5,6 +5,12 @@ export interface IConfigUnsplash {
   collection_id: string;
 }
 
+export interface IConfigWeatherAPI {
+  key: string;
+  cache_time: number;
+}
+
 export interface IConfig {
   unsplash: IConfigUnsplash;
+  weather_api: IConfigWeatherAPI;
 }

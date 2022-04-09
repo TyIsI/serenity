@@ -1,0 +1,13 @@
+.SideMenuButton {
+  border       : solid 1px white;
+  border-radius: 3px;
+  width        : 24px;
+  height       : 24px;
+  padding      : 2px 4px;
+  display      : inline;
+}
+
+.SideMenuCanvas {
+  background-color: black;
+  color           : white;
+}
