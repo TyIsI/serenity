@@ -20,7 +20,7 @@ const BookmarkForm: FC<BookmarkFormProps> = ({ bookmark, submitButtonText, inlin
   useEffect(() => {
     bookmark.title = title
     bookmark.url = url
-  }, [url, title])
+  }, [url, title, bookmark])
 
   useEffect(() => {
     setTitle(bookmark.title ?? '')
