@@ -38,6 +38,8 @@ class FrontendService {
   }
 
   async getPhoto () {
+    if (!global.window) return
+
     const result = await fetch('/api/unsplash')
     const data = await result.json()
 

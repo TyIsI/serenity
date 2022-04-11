@@ -7,6 +7,8 @@ class FrontendService {
   weather: Weather | undefined | unknown
 
   async updateWeather () {
+    if (!global.window) return
+
     if (this.enabled === false) return
 
     if ('geolocation' in navigator) {
