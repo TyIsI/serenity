@@ -4,6 +4,7 @@ import { Form, Row, Col, Button } from 'react-bootstrap'
 import Conditional from 'components/Conditional/Conditional'
 
 import { BookmarkFormProps } from './BookmarkForm.types'
+import Bookmark from '../../classes/Bookmark.class'
 
 // import styles from './BookmarkForm.module.css'
 
