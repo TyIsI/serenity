@@ -41,7 +41,7 @@ const Serenity: NextPage = () => {
           </Col>
 
           <Col className="centered">
-            <Clock /> - <Weather />
+            <Clock /> / <Weather />
           </Col>
 
           <Col className="align-right">
