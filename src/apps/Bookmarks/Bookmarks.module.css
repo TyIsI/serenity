@@ -1,1 +1,17 @@
-.Bookmarks {}
+.Bookmarks {
+  padding      : 5px;
+  border-radius: 5px;
+}
+
+.BookmarksLinkLeft {
+  text-align: left;
+}
+
+.BookmarkMenuButton {
+  border       : solid 2px rgb(224, 224, 224, 0.5);
+  border-radius: 3px;
+  width        : 24px;
+  height       : 24px;
+  padding      : 4px 12px;
+  display      : inline;
+}

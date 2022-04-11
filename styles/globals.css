@@ -104,13 +104,22 @@ HTML {
 }
 
 .app-container button,
-.app-container input {
+.app-container input,
+.app-container .list-group .list-group-item {
   opacity: 0.5;
 }
 
 .app-container:hover button:not(:hover),
-.app-container:hover input:not(:hover) {
-  opacity: 1;
+.app-container:hover input:not(:hover),
+.app-container:hover button:focus,
+.app-container:hover .list-group-item:not(:hover) {
+  opacity: 1 !important;
+}
+
+button:hover,
+input:hover,
+.list-group-item:hover {
+  opacity: 1 !important;
 }
 
 .centered {
@@ -136,4 +145,10 @@ HTML {
 
 .find-me {
   border: solid 1px #00ff00;
+}
+
+#preload {
+  width  : 1px;
+  height : 1px;
+  display: none;
 }

@@ -7,9 +7,9 @@ class FrontendService {
   weather: Weather | undefined | unknown
 
   async updateWeather () {
-    if (this.enabled === false) return
+    if (!global.window) return
 
-    console.log('updating weather')
+    if (this.enabled === false) return
 
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(async (position) => {
@@ -48,7 +48,7 @@ class FrontendService {
     if (this.intervalId !== 0) return
 
     this.updateWeather()
-    this.intervalId = setInterval(this.updateWeather, 5000)
+    this.intervalId = setInterval(this.updateWeather.bind(this), 5000)
   }
 
   stop () {
