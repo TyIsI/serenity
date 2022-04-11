@@ -6,14 +6,14 @@ import { ListGroup, Row, Col } from 'react-bootstrap'
 import BookmarkForm from './components/BookmarkForm/BookmarkForm'
 
 import { BookmarksProps } from './Bookmarks.types'
-import Bookmark from './classes/Bookmark.class'
+import Bookmark, { BookmarkData } from './classes/Bookmark.class'
 
 import styles from './Bookmarks.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Conditional from 'components/Conditional/Conditional'
 
 const Bookmarks: FC<BookmarksProps> = (props: BookmarksProps) => {
-  const [bookmarks, setBookmarks] = useState<Bookmark[]>(stateMachine.get('bookmarks', []).map(({ id, title, url }) => new Bookmark(title, url, id)))
+  const [bookmarks, setBookmarks] = useState<Bookmark[]>(stateMachine.get('bookmarks', []).map(({ id, title, url }: BookmarkData) => new Bookmark(title, url, id)))
   const [editBookmark, setEditBookmark] = useState<number>(0)
   const [showNewBookmark, setShowNewBookmark] = useState<boolean>(false)
   const [newBookmark, setNewBookmark] = useState<Bookmark>(new Bookmark())
