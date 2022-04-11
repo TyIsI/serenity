@@ -1,9 +1,11 @@
 import React, { FC, useEffect, useState } from 'react'
 
+import stateMachine from 'pretty-state-machine'
+import { Spinner } from 'react-bootstrap'
+
 import { WeatherProps } from './Weather.types'
 
 import styles from './Weather.module.css'
-import stateMachine from 'pretty-state-machine'
 
 const Weather: FC<WeatherProps> = () => {
   const [loading, setLoading] = useState(true)
@@ -25,7 +27,7 @@ const Weather: FC<WeatherProps> = () => {
   if (loading) {
     return (
       <div className={styles.Weather}>
-        Loading...
+        <Spinner animation="border" variant="warning" size="sm" /> <b><i>Loading weather...</i></b>
       </div>
     )
   }
