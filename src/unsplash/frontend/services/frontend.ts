@@ -69,7 +69,7 @@ class FrontendService {
     if (typeof window !== 'undefined') { this.preload() }
 
     this.getPhoto()
-    this.intervalId = setInterval(this.getPhoto, 5 * 60 * 1000)
+    this.intervalId = setInterval(this.getPhoto.bind(this), 5 * 60 * 1000)
   }
 
   stop () {
