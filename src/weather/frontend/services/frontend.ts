@@ -48,7 +48,7 @@ class FrontendService {
     if (this.intervalId !== 0) return
 
     this.updateWeather()
-    this.intervalId = setInterval(this.updateWeather.bind(this), 5000)
+    this.intervalId = setInterval(this.updateWeather.bind(this), 300000)
   }
 
   stop () {
