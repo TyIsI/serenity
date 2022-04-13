@@ -67,7 +67,7 @@ const Bookmarks: FC<BookmarksProps> = (props: BookmarksProps) => {
             <ListGroup.Item key={bookmark.id}>
               <Row>
                 <Col xs={9} className={styles.BookmarksLinkLeft}>
-                  <a href={bookmark.url} target="_blank" rel="noopener noreferrer">{bookmark.title}</a>
+                  <a href={bookmark.url}>{bookmark.title}</a>
                 </Col>
                 <Col xs={3}>
                   <span onClick={() => toggleEditBookmark(bookmark.id)} className={styles.BookmarkMenuButton}>
