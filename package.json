@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "release": "npx standard-version",
+    "postrelease": "git push --follow-tags origin main",
     "commit": "npx git-cz"
   },
   "dependencies": {
