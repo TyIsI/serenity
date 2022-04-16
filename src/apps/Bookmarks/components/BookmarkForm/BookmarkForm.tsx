@@ -51,6 +51,10 @@ class BookmarkForm extends Component<BookmarkFormProps, BookmarkFormState> {
   }
 
   onSubmitHandler (): void {
+    if (this.state.title.length === 0 || this.state.url.length === 0) {
+      return
+    }
+
     if (this.props.onSubmit) {
       const bookmark = this.state.bookmark
 
@@ -59,6 +63,10 @@ class BookmarkForm extends Component<BookmarkFormProps, BookmarkFormState> {
 
       this.props.onSubmit(this.state.bookmark)
     }
+  }
+
+  handleClose () {
+    this.setState({ showErrorModal: false })
   }
 
   render () {

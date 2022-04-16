@@ -31,7 +31,7 @@ class Todo extends Component<TodoProps, TodoState> {
     stateMachine.pub({ todolist: this.state.todolist.map(todo => todo.serialize()) })
   }
 
-  removeItem (todo:ToDo) {
+  removeItem (todo: ToDo) {
     const idx = todo.id
 
     this.setState((prevState) => {
@@ -55,7 +55,7 @@ class Todo extends Component<TodoProps, TodoState> {
     })
   }
 
-  newTodoTextHandler (newTodoText:string) {
+  newTodoTextHandler (newTodoText: string) {
     this.setState({ newTodoText })
   }
 
@@ -68,6 +68,10 @@ class Todo extends Component<TodoProps, TodoState> {
   }
 
   addTodoHandler () {
+    if (this.state.newTodoText.length === 0) {
+      return
+    }
+
     this.setState((prevState) => {
       const { todolist, newTodoText } = prevState
 
