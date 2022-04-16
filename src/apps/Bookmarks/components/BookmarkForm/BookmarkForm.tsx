@@ -31,14 +31,14 @@ const BookmarkForm: FC<BookmarkFormProps> = ({ bookmark, submitButtonText, inlin
     <div className="spacious">
       <Form.Group as={Row}>
         <Col>
-          <Form.Control value={url} onChange={(event) => setUrl(event.target.value)} placeholder="url" />
+          <Form.Control value={url} onChange={(event) => setUrl(event.target.value)} placeholder="url" onKeyPress={(e) => { if (e.key === 'Enter') onSubmit(bookmark) }} />
         </Col>
       </Form.Group>
       {inlineSubmitButton === true
         ? (
           <Form.Group as={Row} className="spacious">
             <Col sm={9}>
-              <Form.Control value={title} onChange={(event) => setTitle(event.target.value)} placeholder="title" />
+              <Form.Control value={title} onChange={(event) => setTitle(event.target.value)} placeholder="title" onKeyPress={(e) => { if (e.key === 'Enter') onSubmit(bookmark) }} />
             </Col>
             <Col sm={3}>
               <Button variant="light" onClick={() => onSubmit(bookmark)}>{submitButtonText ?? 'Add'}</Button>
@@ -49,7 +49,7 @@ const BookmarkForm: FC<BookmarkFormProps> = ({ bookmark, submitButtonText, inlin
           <>
             <Form.Group as={Row} className="spacious">
               <Col>
-                <Form.Control value={title} onChange={(event) => setTitle(event.target.value)} placeholder="title" />
+                <Form.Control value={title} onChange={(event) => setTitle(event.target.value)} placeholder="title" onKeyPress={(e) => { if (e.key === 'Enter') onSubmit(bookmark) }} />
               </Col>
             </Form.Group>
             <Form.Group as={Row} >

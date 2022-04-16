@@ -87,7 +87,7 @@ class Todo extends Component<TodoProps, TodoState> {
 
         <Form.Group as={Row} className="mb-3">
           <Col sm={9}>
-            <Form.Control name="newTodoText" value={this.state.newTodoText} onChange={(event) => this.newTodoTextHandler(event.target.value)} />
+            <Form.Control name="newTodoText" value={this.state.newTodoText} onChange={(event) => this.newTodoTextHandler(event.target.value)} onKeyPress={(e) => { if (e.key === 'Enter') this.addTodoHandler() }} />
           </Col>
           <Col sm={3}>
             <Button variant="light" onClick={() => this.addTodoHandler()}>Add</Button>

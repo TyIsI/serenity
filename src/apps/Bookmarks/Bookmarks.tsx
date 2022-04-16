@@ -45,6 +45,8 @@ const Bookmarks: FC<BookmarksProps> = (props: BookmarksProps) => {
         return bookmark
       }
     }))
+
+    setEditBookmark(0)
   }
 
   const removeBookmark = (removedBookmark: Bookmark) => {
