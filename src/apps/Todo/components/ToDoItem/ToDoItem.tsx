@@ -43,6 +43,15 @@ class ToDoItem extends Component<ToDoItemProps, ToDoItemState> {
     this.setState({ text })
   }
 
+  keyHandler (event: any) {
+    if (event.key === 'Enter') {
+      this.endEdit(event)
+    } else if (event.key === 'Escape') {
+      this.setState({ text: this.state.todo.text })
+      this.toggleEdit()
+    }
+  }
+
   render () {
     return (
       <div className={styles.ToDoItem} key={this.state.todo.id}>
@@ -53,7 +62,7 @@ class ToDoItem extends Component<ToDoItemProps, ToDoItemState> {
           <Col>
             {this.state.editing === false
               ? (<span onClick={() => this.toggleEdit()}>{this.state.text}</span>)
-              : (<Form.Control name="text" value={this.state.text} onChange={(event) => this.handleTextChange(event.target.value)} onBlur={(event) => this.endEdit(event)} />)
+              : (<Form.Control name="text" value={this.state.text} onChange={(event) => this.handleTextChange(event.target.value)} onBlur={(event) => this.endEdit(event)} onKeyUp={(event) => this.keyHandler(event)} />)
             }
           </Col>
         </Row>

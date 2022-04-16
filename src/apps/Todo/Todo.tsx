@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { stateMachine } from 'pretty-state-machine'
 import { Row, Col, Form, Button } from 'react-bootstrap'
 
@@ -60,6 +59,14 @@ class Todo extends Component<TodoProps, TodoState> {
     this.setState({ newTodoText })
   }
 
+  newTodoKeyHandler (key: string) {
+    switch (key) {
+      case 'Enter':
+        this.addTodoHandler()
+        break
+    }
+  }
+
   addTodoHandler () {
     this.setState((prevState) => {
       const { todolist, newTodoText } = prevState
@@ -87,7 +94,7 @@ class Todo extends Component<TodoProps, TodoState> {
 
         <Form.Group as={Row} className="mb-3">
           <Col sm={9}>
-            <Form.Control name="newTodoText" value={this.state.newTodoText} onChange={(event) => this.newTodoTextHandler(event.target.value)} onKeyPress={(e) => { if (e.key === 'Enter') this.addTodoHandler() }} />
+            <Form.Control name="newTodoText" value={this.state.newTodoText} onChange={(event) => this.newTodoTextHandler(event.target.value)} onKeyUp={(event) => this.newTodoKeyHandler(event.key)} />
           </Col>
           <Col sm={3}>
             <Button variant="light" onClick={() => this.addTodoHandler()}>Add</Button>

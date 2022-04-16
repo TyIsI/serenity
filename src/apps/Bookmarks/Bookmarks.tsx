@@ -8,9 +8,10 @@ import BookmarkForm from './components/BookmarkForm/BookmarkForm'
 import { BookmarksProps } from './Bookmarks.types'
 import Bookmark, { BookmarkData } from './classes/Bookmark.class'
 
-import styles from './Bookmarks.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Conditional from 'components/Conditional/Conditional'
+
+import styles from './Bookmarks.module.css'
 
 const Bookmarks: FC<BookmarksProps> = (props: BookmarksProps) => {
   const [bookmarks, setBookmarks] = useState<Bookmark[]>(stateMachine.get('bookmarks', []).map(({ id, title, url }: BookmarkData) => new Bookmark(title, url, id)))
@@ -59,6 +60,10 @@ const Bookmarks: FC<BookmarksProps> = (props: BookmarksProps) => {
     )
   }
 
+  const cancelEditBookmark = () => {
+    setEditBookmark(0)
+  }
+
   return (
     <div className={styles.Bookmarks}>
       <h3>Bookmarks</h3>
@@ -80,7 +85,7 @@ const Bookmarks: FC<BookmarksProps> = (props: BookmarksProps) => {
               <Conditional condition={editBookmark === bookmark.id}>
                 <Row>
                   <Col>
-                    <BookmarkForm bookmark={bookmark} onDelete={(removedBookmark: Bookmark) => removeBookmark(removedBookmark)} onSubmit={(updatedBookmark: Bookmark) => updateBookmark(updatedBookmark)} submitButtonText="Update" inlineSubmitButton={false} />
+                    <BookmarkForm bookmark={bookmark} onCancel={() => cancelEditBookmark()} onDelete={(removedBookmark: Bookmark) => removeBookmark(removedBookmark)} onSubmit={(updatedBookmark: Bookmark) => updateBookmark(updatedBookmark)} submitButtonText="Update" inlineSubmitButton={false} />
                   </Col>
                 </Row>
               </Conditional>
