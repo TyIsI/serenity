@@ -6,16 +6,16 @@ import { Row, Col, Form, Button } from 'react-bootstrap'
 
 import ToDoItem from './components/ToDoItem/ToDoItem'
 
-import { ToDoListProps, ToDoListState } from './ToDoList.types'
+import { TodoProps, TodoState } from './Todo.types'
 
 import ToDo, { ToDoData } from './classes/ToDo.class'
 
-import styles from './ToDoList.module.css'
+import styles from './Todo.module.css'
 
-class ToDoList extends Component<ToDoListProps, ToDoListState> {
+class Todo extends Component<TodoProps, TodoState> {
   interval: any
 
-  constructor (props: ToDoListProps) {
+  constructor (props: TodoProps) {
     super(props)
 
     this.state = {
@@ -28,7 +28,7 @@ class ToDoList extends Component<ToDoListProps, ToDoListState> {
     this.setState({ todolist: stateMachine.get('todolist', []).map((todo: ToDoData) => ToDo.unserialize(todo)) })
   }
 
-  componentDidUpdate (prevProps: ToDoListProps, prevState: any) {
+  componentDidUpdate (prevProps: TodoProps, prevState: any) {
     stateMachine.pub({ todolist: this.state.todolist.map(todo => todo.serialize()) })
   }
 
@@ -74,10 +74,10 @@ class ToDoList extends Component<ToDoListProps, ToDoListState> {
 
   render () {
     return (
-      <div className={styles.ToDoList}>
+      <div className={styles.Todo}>
         <Row>
           <Col>
-            <h3>ToDo (App)</h3>
+            <h3>To-Do</h3>
           </Col>
         </Row>
 
@@ -98,4 +98,4 @@ class ToDoList extends Component<ToDoListProps, ToDoListState> {
   }
 }
 
-export default ToDoList
+export default Todo

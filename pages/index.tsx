@@ -10,7 +10,7 @@ import UnsplashFrontendService from 'src/unsplash/frontend/services/frontend'
 import WeatherFrontendService from 'src/weather/frontend/services/frontend'
 import PhotoTemplate from 'src/unsplash/util/PhotoTemplate'
 
-import ToDoList from 'src/apps/ToDoList/ToDoList'
+import Todo from 'src/apps/Todo/Todo'
 import Bookmarks from 'src/apps/Bookmarks/Bookmarks'
 import SourceCredit from 'src/components/SourceCredit/SourceCredit'
 import Menu from 'src/components/SideMenu/SideMenu'
@@ -51,7 +51,7 @@ const Serenity: NextPage = () => {
 
         <Row>
           <Col className="app-container fixed-left" xs={4}>
-            {showTodo && (<ToDoList />)}
+            {showTodo && (<Todo />)}
           </Col>
 
           <Col className="main-container">

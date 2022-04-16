@@ -1,8 +1,8 @@
 import ToDo from './classes/ToDo.class'
 
-export interface ToDoListProps { }
+export interface TodoProps { }
 
-export interface ToDoListState {
+export interface TodoState {
   todolist: ToDo[];
   newTodoText: string;
 }
