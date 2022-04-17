@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.5](https://github.com/TyIsI/serenity-dashboard/compare/v0.1.4...v0.1.5) (2022-04-17)
+
+
+### Features
+
+* draggable todos and bookmarks ([a138116](https://github.com/TyIsI/serenity-dashboard/commit/a138116ad2b02e4b60e2624797ca8a9fb6ed0ce3)), closes [#4](https://github.com/TyIsI/serenity-dashboard/issues/4)
+
+
+### Bug Fixes
+
+* typing fixes for todo/bookmark reordering ([efe3898](https://github.com/TyIsI/serenity-dashboard/commit/efe38982625fd75a8bcc007423b8772b715f8eb1)), closes [#4](https://github.com/TyIsI/serenity-dashboard/issues/4)
+
 ### [0.1.4](https://github.com/TyIsI/serenity-dashboard/compare/v0.1.3...v0.1.4) (2022-04-16)
 
 
