@@ -15,7 +15,7 @@ export default class Bookmark implements BookmarkData {
     if (url != null) this.url = url
   }
 
-  serialize () {
+  serialize (): BookmarkData {
     return {
       id: this.id,
       title: this.title,

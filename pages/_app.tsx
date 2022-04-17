@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import '../styles/globals.css'
+import '../styles/Bookmarks.css'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
