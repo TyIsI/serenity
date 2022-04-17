@@ -2,6 +2,9 @@ import React, { FC, useState, useEffect } from 'react'
 
 import { stateMachine } from 'pretty-state-machine'
 import { ListGroup, Row, Col } from 'react-bootstrap'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+
+import { reorder } from 'src/lib/util'
 
 import BookmarkForm from './components/BookmarkForm/BookmarkForm'
 
@@ -12,6 +15,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Conditional from 'components/Conditional/Conditional'
 
 import styles from './Bookmarks.module.css'
+
+const getItemStyle = (isDragging: any, draggableStyle: any) => {
+  return ({
+    border: isDragging && 'solid 1px white',
+    borderRadius: isDragging && '0.25rem',
+
+    // styles we need to apply on draggables
+    ...draggableStyle
+  })
+}
+
+const getListStyle = (isDraggingOver: any) => ({
+  background: isDraggingOver && 'rgba(0, 0, 0, 0.1)',
+  borderRadius: '.25rem'
+})
 
 const Bookmarks: FC<BookmarksProps> = (props: BookmarksProps) => {
   const [bookmarks, setBookmarks] = useState<Bookmark[]>(stateMachine.get('bookmarks', []).map(({ id, title, url }: BookmarkData) => new Bookmark(title, url, id)))
@@ -64,34 +82,73 @@ const Bookmarks: FC<BookmarksProps> = (props: BookmarksProps) => {
     setEditBookmark(0)
   }
 
+  const onDragEnd = (result: { destination: { index: number }; source: { index: number } }) => {
+    // dropped outside the list
+    if (!result.destination) {
+      return
+    }
+
+    const reorderedBookmarks = reorder(
+      bookmarks,
+      result.source.index,
+      result.destination.index
+    )
+
+    setBookmarks(reorderedBookmarks)
+  }
+
   return (
     <div className={styles.Bookmarks}>
       <h3>Bookmarks</h3>
       <hr />
       <ListGroup>
-        {bookmarks.map((bookmark) => {
-          return (
-            <ListGroup.Item key={bookmark.id}>
-              <Row>
-                <Col xs={9} className={styles.BookmarksLinkLeft}>
-                  <a href={bookmark.url}>{bookmark.title}</a>
-                </Col>
-                <Col xs={3}>
-                  <span onClick={() => toggleEditBookmark(bookmark.id)} className={styles.BookmarkMenuButton}>
-                    <FontAwesomeIcon icon={['fas', 'ellipsis-vertical']} />
-                  </span>
-                </Col>
-              </Row>
-              <Conditional condition={editBookmark === bookmark.id}>
-                <Row>
-                  <Col>
-                    <BookmarkForm bookmark={bookmark} onCancel={() => cancelEditBookmark()} onDelete={(removedBookmark: Bookmark) => removeBookmark(removedBookmark)} onSubmit={(updatedBookmark: Bookmark) => updateBookmark(updatedBookmark)} submitButtonText="Update" inlineSubmitButton={false} />
-                  </Col>
-                </Row>
-              </Conditional>
-            </ListGroup.Item>
-          )
-        })}
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="droppable">
+            {(provided: any, snapshot: any) => (
+              <div {...provided.droppableProps} ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)}>
+                {bookmarks.map((bookmark, index) => {
+                  return (
+                    <Draggable key={bookmark.id} draggableId={'' + bookmark.id} index={index}>
+                      {(provided, snapshot) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          style={getItemStyle(
+                            snapshot.isDragging,
+                            provided.draggableProps.style
+                          )}
+                        >
+                          <ListGroup.Item className={styles.BookmarksItem}>
+                            <Row>
+                              <Col xs={9} className={styles.BookmarksLinkLeft}>
+                                <a href={bookmark.url}>{bookmark.title}</a>
+                              </Col>
+                              <Col xs={3}>
+                                <span onClick={() => toggleEditBookmark(bookmark.id)} className={styles.BookmarkMenuButton}>
+                                  <FontAwesomeIcon icon={['fas', 'ellipsis-vertical']} />
+                                </span>
+                              </Col>
+                            </Row>
+                            <Conditional condition={editBookmark === bookmark.id}>
+                              <Row>
+                                <Col>
+                                  <BookmarkForm bookmark={bookmark} onCancel={() => cancelEditBookmark()} onDelete={(removedBookmark: Bookmark) => removeBookmark(removedBookmark)} onSubmit={(updatedBookmark: Bookmark) => updateBookmark(updatedBookmark)} submitButtonText="Update" inlineSubmitButton={false} />
+                                </Col>
+                              </Row>
+                            </Conditional>
+                          </ListGroup.Item>
+
+                        </div>
+                      )}
+                    </Draggable>
+                  )
+                })}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </ListGroup>
       <hr />
       <Row>
