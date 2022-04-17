@@ -1,8 +1,8 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useState, useEffect, SetStateAction } from 'react'
 
 import { stateMachine } from 'pretty-state-machine'
 import { ListGroup, Row, Col } from 'react-bootstrap'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable, Draggable, DropResult, ResponderProvided } from 'react-beautiful-dnd'
 
 import { reorder } from 'src/lib/util'
 
@@ -46,7 +46,10 @@ const Bookmarks: FC<BookmarksProps> = (props: BookmarksProps) => {
   }
 
   useEffect(() => {
-    stateMachine.pub({ bookmarks: bookmarks.map(bookmark => bookmark.serialize()) })
+    // @ts-ignore
+    const bookmarksData:BookmarkData[] = bookmarks.map((bookmark) => bookmark.serialize())
+
+    stateMachine.pub({ bookmarks: bookmarksData })
   }, [bookmarks])
 
   const toggleShowNewBookmark = () => setShowNewBookmark(!showNewBookmark)
@@ -57,7 +60,7 @@ const Bookmarks: FC<BookmarksProps> = (props: BookmarksProps) => {
   }
 
   const updateBookmark = (updatedBookmark: Bookmark) => {
-    setBookmarks(bookmarks.map((bookmark) => {
+    setBookmarks(bookmarks.map((bookmark:Bookmark) => {
       if (bookmark.id === updatedBookmark.id) {
         return updatedBookmark
       } else {
@@ -82,16 +85,18 @@ const Bookmarks: FC<BookmarksProps> = (props: BookmarksProps) => {
     setEditBookmark(0)
   }
 
-  const onDragEnd = (result: { destination: { index: number }; source: { index: number } }) => {
-    // dropped outside the list
-    if (!result.destination) {
+  const onDragEnd = (result: DropResult, provided: ResponderProvided) => {
+    if (result.destination === undefined || result.destination.index === undefined) {
       return
     }
 
-    const reorderedBookmarks = reorder(
+    const srcIndex = result?.source?.index ?? 0
+    const dstIndex = result?.destination?.index ?? 0
+
+    const reorderedBookmarks:SetStateAction<any[]> = reorder(
       bookmarks,
-      result.source.index,
-      result.destination.index
+      srcIndex,
+      dstIndex
     )
 
     setBookmarks(reorderedBookmarks)

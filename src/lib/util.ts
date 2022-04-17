@@ -1,4 +1,4 @@
-export const reorder = (list: any|any[], startIndex: number, endIndex: number) => {
+export const reorder = (list: any|any[], startIndex: number, endIndex: number): unknown[] => {
   const result = Array.from(list)
 
   const [removed] = result.splice(startIndex, 1)

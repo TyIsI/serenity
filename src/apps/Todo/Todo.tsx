@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 
 import { stateMachine } from 'pretty-state-machine'
 import { Row, Col, Form, Button } from 'react-bootstrap'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-
-import { reorder } from 'src/lib/util'
+import { DragDropContext, Droppable, Draggable, DropResult, ResponderProvided } from 'react-beautiful-dnd'
 
 import ToDoItem from './components/ToDoItem/ToDoItem'
 
@@ -26,6 +24,16 @@ const getListStyle = (isDraggingOver: any) => ({
   background: isDraggingOver && 'rgba(0, 0, 0, 0.1)'
 })
 
+const reorder = (list: Array<ToDo>, startIndex: number, endIndex: number): Array<ToDo> => {
+  const result:Array<ToDo> = Array.from(list)
+
+  const [removed] = result.splice(startIndex, 1)
+
+  result.splice(endIndex, 0, removed)
+
+  return result
+}
+
 class Todo extends Component<TodoProps, TodoState> {
   interval: any
 
@@ -45,7 +53,9 @@ class Todo extends Component<TodoProps, TodoState> {
   }
 
   componentDidUpdate (prevProps: TodoProps, prevState: any) {
-    stateMachine.pub({ todolist: this.state.todolist.map(todo => todo.serialize()) })
+    const todolistUpdate = this.state.todolist.map((todo: ToDo) => todo.serialize())
+
+    stateMachine.pub({ todolist: todolistUpdate })
   }
 
   removeItem (todo: ToDo) {
@@ -100,17 +110,19 @@ class Todo extends Component<TodoProps, TodoState> {
     })
   }
 
-  onDragEnd (result: { destination: { index: number }; source: { index: number } }) {
-    // dropped outside the list
-    if (!result.destination) {
+  onDragEnd (result: DropResult, provided: ResponderProvided) {
+    if (result.destination === undefined || result.destination.index === undefined) {
       return
     }
 
-    this.setState((prevState) => {
+    this.setState((prevState:TodoState) => {
+      const srcIndex = result?.source?.index ?? 0
+      const dstIndex = result?.destination?.index ?? 0
+
       const todolist = reorder(
         prevState.todolist,
-        result.source.index,
-        result.destination.index
+        srcIndex,
+        dstIndex
       )
 
       return { todolist }
