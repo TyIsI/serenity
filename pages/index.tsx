@@ -36,15 +36,15 @@ const Serenity: NextPage = () => {
     <>
       <Container fluid>
         <Row className={classnames(['navbar', 'navbar-shadow', 'fixed-top'])}>
-          <Col className="align-left">
+          <Col className="align-left" md={3} lg={2}>
             <span onClick={() => toggleTodo(!showTodo)}>Todo</span>
           </Col>
 
-          <Col className="centered">
+          <Col className="centered" md={6}>
             <Clock /> / <Weather />
           </Col>
 
-          <Col className="align-right">
+          <Col className="align-right" md={3} lg={2}>
             <span onClick={() => toggleBookmarks(!showBookmarks)}>Bookmarks</span>
           </Col>
         </Row>
