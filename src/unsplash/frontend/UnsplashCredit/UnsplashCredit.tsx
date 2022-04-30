@@ -14,7 +14,7 @@ const UnsplashCredit: FC<UnsplashCreditProps> = (props: UnsplashCreditProps) => 
 
   return (
     <div className={styles.UnsplashCredit}>
-      <span><a href={photoInfo.links.html}>Photo</a> by <a href={photoInfo.user.links.html + '?utm_source=Serenity&utm_medium=referral'}>{photoInfo.user.first_name} {photoInfo.user.last_name}</a> on <a href="https://unsplash.com/?utm_source=Serenity&utm_medium=referral">Unsplash</a></span>
+      <span><a href={photoInfo.links.html + '?utm_source=Serenity&utm_medium=referral'}>Photo</a> by <a href={photoInfo.user.links.html + '?utm_source=Serenity&utm_medium=referral'}>{photoInfo.user.first_name} {photoInfo.user.last_name}</a> on <a href="https://unsplash.com/?utm_source=Serenity&utm_medium=referral">Unsplash</a></span>
     </div>
   )
 }
