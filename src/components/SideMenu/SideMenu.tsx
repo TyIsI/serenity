@@ -35,7 +35,8 @@ const SideMenu: FC<SideMenuProps> = () => {
         <Offcanvas.Body>
           <ReactMarkdown>{intro}</ReactMarkdown>
           <hr />
-          Weather powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a>
+          Imagery powered by <a href="https://unsplash.com/" title="Unsplash">unsplash.com</a><br />
+          Weather powered by <a href="https://weatherapi.com/" title="Free Weather API">WeatherAPI.com</a>
         </Offcanvas.Body>
       </Offcanvas>
     </>
