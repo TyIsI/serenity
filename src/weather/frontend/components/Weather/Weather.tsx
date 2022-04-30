@@ -32,9 +32,11 @@ const Weather: FC<WeatherProps> = () => {
     )
   }
 
+  console.log('weather:', weather)
+
   return (
     <div className={styles.Weather}>
-      <b>{weather.current.temp_c}C - {weather.current.condition.text} <img alt={weather.current.condition.text} src={'https:' + weather.current.condition.icon} width={24} height={24} /></b>
+      <b>{weather.location.name} / {weather.current.temp_c}C - {weather.current.condition.text} <img alt={weather.current.condition.text} src={'https:' + weather.current.condition.icon} width={24} height={24} /></b>
     </div>
   )
 }
