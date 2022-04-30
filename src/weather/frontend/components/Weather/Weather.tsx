@@ -9,9 +9,9 @@ import styles from './Weather.module.css'
 
 const Weather: FC<WeatherProps> = () => {
   const [loading, setLoading] = useState(true)
-  const [weather, setWeather] = useState({ current: { temp_c: 0, condition: { text: '', icon: '' } } })
+  const [weather, setWeather] = useState({ location: { name: '' }, current: { temp_c: 0, condition: { text: '', icon: '' } } })
 
-  const updater = ({ weather }:{weather: {weather:{ current: { temp_c: 0, condition: { text: '', icon:'' } } }}}) => {
+  const updater = ({ weather }:{weather: {weather:{ location: { name: '' }, current: { temp_c: 0, condition: { text: '', icon:'' } } }}}) => {
     setWeather(weather.weather)
     setLoading(false)
   }
@@ -31,8 +31,6 @@ const Weather: FC<WeatherProps> = () => {
       </div>
     )
   }
-
-  console.log('weather:', weather)
 
   return (
     <div className={styles.Weather}>
