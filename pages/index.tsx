@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import { Random } from 'unsplash-js/dist/methods/photos/types'
 
 import Clock from 'src/components/Clock/Clock'
-import UnsplashCredit from 'src/components/UnsplashCredit/UnsplashCredit'
+import UnsplashCredit from 'src/unsplash/frontend/UnsplashCredit/UnsplashCredit'
 import UnsplashFrontendService from 'src/unsplash/frontend/services/frontend'
 import WeatherFrontendService from 'src/weather/frontend/services/frontend'
 import PhotoTemplate from 'src/unsplash/util/PhotoTemplate'
