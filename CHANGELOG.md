@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.6](https://github.com/TyIsI/serenity-dashboard/compare/v0.1.5...v0.1.6) (2022-05-01)
+
+
+### Features
+
+* **weather:** added location to weather component ([81999dc](https://github.com/TyIsI/serenity-dashboard/commit/81999dc98dac2883df0506af1cfc07cf1809c051))
+
+
+### Bug Fixes
+
+* **index:** fixed overflow for main container ([6cd3d2c](https://github.com/TyIsI/serenity-dashboard/commit/6cd3d2c647df63398c6969f0fea7bf0c4bcd711e))
+* **unsplashcredit:** added photo link to UnsplashCredit ([3e2077a](https://github.com/TyIsI/serenity-dashboard/commit/3e2077a7fd040e966f15d579bcee91d114a4b6c3))
+* **unsplashcredit:** added utm to photo link in UnsplashCredit ([56dffaf](https://github.com/TyIsI/serenity-dashboard/commit/56dffafd486ec6f6e806f2ad6e0359e8d678046c))
+
 ### [0.1.5](https://github.com/TyIsI/serenity-dashboard/compare/v0.1.4...v0.1.5) (2022-04-17)
 
 
