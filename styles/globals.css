@@ -104,6 +104,10 @@ HTML {
   background-color: rgb(0 0 0 / 50%);
 }
 
+.list-group-item A {
+  text-shadow: none;
+}
+
 .app-container button,
 .app-container input,
 .app-container .list-group .list-group-item {
