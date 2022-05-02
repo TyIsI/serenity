@@ -34,10 +34,7 @@ class BackendService {
   }
 
   async refreshPhoto () {
-    console.log('Refreshing photo...')
-
     if (this.cachedPhoto === null || Date.now() > this.photoExpiryTime) {
-      console.log('Fetching new photo')
       const photoResult: UnsplashApiResponse<UnsplashRandomPhoto | UnsplashRandomPhoto[]> = await this.unsplash.photos.getRandom({
         orientation: 'landscape',
         collectionIds: [config.unsplash.collection_id],
