@@ -7,7 +7,10 @@ export interface IConfigUnsplash {
 
 export interface IConfigWeatherAPI {
   key: string;
-  cache_time: number;
+  cache: {
+    time: number;
+    interval: number
+  };
 }
 
 export interface IConfig {
