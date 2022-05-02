@@ -14,7 +14,7 @@ import Todo from 'src/apps/Todo/Todo'
 import Bookmarks from 'src/apps/Bookmarks/Bookmarks'
 import SourceCredit from 'src/components/SourceCredit/SourceCredit'
 import Menu from 'src/components/SideMenu/SideMenu'
-import Weather from 'src/weather/frontend/components/Weather/Weather.lazy'
+import Weather from 'src/weather/frontend/components/Weather/Weather'
 
 const Serenity: NextPage = () => {
   const [photo, setPhoto] = useState<Random>(PhotoTemplate)
