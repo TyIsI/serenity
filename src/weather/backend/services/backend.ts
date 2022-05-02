@@ -31,7 +31,7 @@ class WeatherBackendServiceImpl implements iWeatherBackendService {
       const cacheEntry:WeatherCacheEntry = {
         ts: Date.now(),
         weather,
-        expiry_time: (Date.now() + (config.weather_api.cache_time * 1000))
+        expiry_time: (Date.now() + (config.weather_api.cache.time * 1000))
       }
 
       this.cache[cacheKey] = cacheEntry
@@ -49,7 +49,7 @@ class WeatherBackendServiceImpl implements iWeatherBackendService {
   }
 
   start () {
-    this.intervalId = setInterval(this.maintenance, (60 / 50) * 60 * 1000)
+    this.intervalId = setInterval(this.maintenance, 60000)
   }
 
   stop () {

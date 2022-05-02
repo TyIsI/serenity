@@ -1,42 +1,55 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { Component } from 'react'
 
 import stateMachine from 'pretty-state-machine'
 import { Spinner } from 'react-bootstrap'
 
-import { WeatherProps } from './Weather.types'
+import { WeatherProps, WeatherState } from './Weather.types'
 
 import styles from './Weather.module.css'
 
-const Weather: FC<WeatherProps> = () => {
-  const [loading, setLoading] = useState(true)
-  const [weather, setWeather] = useState({ location: { name: '' }, current: { temp_c: 0, condition: { text: '', icon: '' } } })
+class Weather extends Component<WeatherProps, WeatherState> {
+  constructor (props: WeatherProps | Readonly<WeatherProps>) {
+    super(props)
 
-  const updater = ({ weather }:{weather: {weather:{ location: { name: '' }, current: { temp_c: 0, condition: { text: '', icon:'' } } }}}) => {
-    setWeather(weather.weather)
-    setLoading(false)
+    const weather = stateMachine.get('weather', { weather: { location: { name: '' }, current: { temp_c: 0, condition: { text: '', icon: '' } } } })
+
+    this.state = {
+      loading: weather.weather.location.name === '',
+      weather: weather
+    }
   }
 
-  useEffect(() => {
-    stateMachine.sub('weather', updater)
+  componentDidMount () {
+    stateMachine.sub('weather', this.setState.bind(this))
+  }
 
-    return () => {
-      stateMachine.unsub('weather', updater)
+  componentWillUnmount () {
+    stateMachine.unsub('weather', this.setState.bind(this))
+  }
+
+  componentDidUpdate (prevProps: WeatherProps, prevState: WeatherState) {
+    if (prevState.weather !== this.state.weather) {
+      this.setState({ loading: false })
     }
-  })
+  }
 
-  if (loading) {
+  render () {
+    if (this.state.loading) {
+      return (
+        <div className={styles.Weather}>
+          <Spinner animation="border" variant="warning" size="sm" /> <b><i>Loading weather...</i></b>
+        </div>
+      )
+    }
+
+    const weather = this.state.weather.weather
+
     return (
       <div className={styles.Weather}>
-        <Spinner animation="border" variant="warning" size="sm" /> <b><i>Loading weather...</i></b>
+        <b>{weather.location.name} / {weather.current.temp_c}C - {weather.current.condition.text} <img alt={weather.current.condition.text} src={'https:' + weather.current.condition.icon} width={24} height={24} /></b>
       </div>
     )
   }
-
-  return (
-    <div className={styles.Weather}>
-      <b>{weather.location.name} / {weather.current.temp_c}C - {weather.current.condition.text} <img alt={weather.current.condition.text} src={'https:' + weather.current.condition.icon} width={24} height={24} /></b>
-    </div>
-  )
 }
 
 export default Weather
