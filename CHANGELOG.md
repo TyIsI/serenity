@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.7](https://github.com/TyIsI/serenity-dashboard/compare/v0.1.6...v0.1.7) (2022-05-03)
+
+
+### Features
+
+* improved caching configuration for weather ([2bf14fe](https://github.com/TyIsI/serenity-dashboard/commit/2bf14fe3e8099a2f8acf8df61681f780bf68c5bd))
+
 ### [0.1.6](https://github.com/TyIsI/serenity-dashboard/compare/v0.1.5...v0.1.6) (2022-05-01)
 
 
