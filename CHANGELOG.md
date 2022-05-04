@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.8](https://github.com/TyIsI/serenity-dashboard/compare/v0.1.7...v0.1.8) (2022-05-04)
+
+
+### Features
+
+* added Settings component to SideMenu ([d027e6e](https://github.com/TyIsI/serenity-dashboard/commit/d027e6e67a248c548b48481770f9ed02ca6eb277))
+* clock time setting ([f76ffa9](https://github.com/TyIsI/serenity-dashboard/commit/f76ffa968bc6658f2ba05ae2e59c7c528b492b5f))
+* frontend Config Service ([06fda7f](https://github.com/TyIsI/serenity-dashboard/commit/06fda7ff5a6d9ceda7ddf28a3c8a817bdb9404d2)), closes [#2](https://github.com/TyIsI/serenity-dashboard/issues/2)
+* settings Component ([78f7cb6](https://github.com/TyIsI/serenity-dashboard/commit/78f7cb63545b16d6c3ae37a9a063788450a393d9))
+* weather measurement unit settings ([ac3f8db](https://github.com/TyIsI/serenity-dashboard/commit/ac3f8db539425c92a656f90005e20b030f2b1d53))
+
+
+### Bug Fixes
+
+* config Service: removed debugging code ([42c6a38](https://github.com/TyIsI/serenity-dashboard/commit/42c6a38834930f93da20714b6d36826970b11973))
+
 ### [0.1.7](https://github.com/TyIsI/serenity-dashboard/compare/v0.1.6...v0.1.7) (2022-05-03)
 
 
