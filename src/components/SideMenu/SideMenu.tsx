@@ -3,6 +3,8 @@ import { Offcanvas } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ReactMarkdown from 'react-markdown'
 
+import Settings from '../Settings/Settings'
+
 import { SideMenuProps } from './SideMenu.types'
 
 import styles from './SideMenu.module.css'
@@ -34,6 +36,8 @@ const SideMenu: FC<SideMenuProps> = () => {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <ReactMarkdown>{intro}</ReactMarkdown>
+          <hr />
+          <Settings />
           <hr />
           Imagery powered by <a href="https://unsplash.com/" title="Unsplash">unsplash.com</a><br />
           Weather powered by <a href="https://weatherapi.com/" title="Free Weather API">WeatherAPI.com</a>
