@@ -14,15 +14,6 @@ export class ConfigService {
 
   constructor () {
     this.store = { clockMode: 24, measurementsMode: 'federation', ts: Date.now() }
-    stateMachine.sub('config', (config: ConfigStoreType) => {
-      console.log('config', config)
-    })
-    stateMachine.sub('clockMode', (clockMode) => {
-      console.log('clockMode', clockMode)
-    })
-    stateMachine.sub('measurementsMode', (measurementsMode) => {
-      console.log('measurementsMode', measurementsMode)
-    })
   }
 
   refresh () {
