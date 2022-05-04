@@ -1,4 +1,6 @@
-.Settings {}
+.Settings {
+  display: inherit;
+}
 
 .SettingsLabel {
   vertical-align: middle;
