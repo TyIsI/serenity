@@ -5,14 +5,17 @@ import { ClockProps } from './Clock.types'
 
 import styles from './Clock.module.css'
 
+const timeFormats:any[] = [
+  { locale: 'en-GB', options: { hour: 'numeric', minute: 'numeric', second: 'numeric' } },
+  { locale: 'en-US', options: { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true } }
+]
+
 const renderTime = (clockMode:number) => {
   const date = new Date()
 
-  const hours = ('' + ((clockMode === 24) ? date.getHours() : (date.getHours() % 12))).padStart(2, '0')
-  const minutes = ('' + date.getMinutes()).padStart(2, '0')
-  const seconds = ('' + date.getSeconds()).padStart(2, '0')
+  const { locale, options } = clockMode === 24 ? timeFormats[0] : timeFormats[1]
 
-  return (clockMode === 24) ? `${hours}:${minutes}:${seconds}` : `${hours}:${minutes}:${seconds} ${date.getHours() > 12 ? 'PM' : 'AM'}`
+  return date.toLocaleTimeString(locale, options)
 }
 
 const Clock: FC<ClockProps> = () => {
