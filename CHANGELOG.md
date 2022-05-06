@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.10](https://github.com/TyIsI/serenity-dashboard/compare/v0.1.9...v0.1.10) (2022-05-06)
+
+
+### Features
+
+* improved typing ([b2723d8](https://github.com/TyIsI/serenity-dashboard/commit/b2723d81317018e5ebdfd5dc46d0313a21ea94b4))
+* user consent form for location access ([60f8286](https://github.com/TyIsI/serenity-dashboard/commit/60f8286dd25f750611ef94f0dae9f922ed13a830)), closes [#7](https://github.com/TyIsI/serenity-dashboard/issues/7)
+* **weatherconsentmodal:** added WeatherConsentModal component ([b6f87a9](https://github.com/TyIsI/serenity-dashboard/commit/b6f87a90ff90fc54eae9eea8605818217a266c8a))
+
+
+### Bug Fixes
+
+* fixed WeatherConsentModal build issue ([d59bf47](https://github.com/TyIsI/serenity-dashboard/commit/d59bf47a296f62f72789ea6272ccb4ae02039712))
+
 ### [0.1.9](https://github.com/TyIsI/serenity-dashboard/compare/v0.1.8...v0.1.9) (2022-05-05)
 
 
