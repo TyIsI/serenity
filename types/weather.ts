@@ -63,3 +63,5 @@ export interface WeatherCache {
 
 export interface iWeatherBackendService {
 }
+
+export interface WeatherObject { weather: { location: { name: '' }, current: { temp_c: 0, temp_f: 0, condition: { text: '', icon: '' } } } }

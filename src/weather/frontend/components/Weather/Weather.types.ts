@@ -1,9 +1,12 @@
-import { MeasurementsModes } from 'src/config/frontend/service'
+import { MeasurementsModes } from 'types/units'
+import { ConsentTypes } from 'types/consent'
+import { WeatherObject } from 'types/weather'
 
-export interface WeatherObject { weather: { location: { name: '' }, current: { temp_c: 0, temp_f: 0, condition: { text: '', icon: '' } } } }
 export interface WeatherProps { }
 export interface WeatherState {
   loading: boolean;
   weather: WeatherObject;
   measurementsMode: MeasurementsModes;
+  locationConsent: ConsentTypes;
+  showConsentModal: boolean;
 }

@@ -3,7 +3,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import BackendService from 'src/weather/backend/services/backend'
-import { WeatherCacheEntry } from 'src/weather/types/weather'
+import { WeatherCacheEntry } from 'types/weather'
 
 type Data = WeatherCacheEntry
 

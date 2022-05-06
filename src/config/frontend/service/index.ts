@@ -1,7 +1,6 @@
 import { stateMachine } from 'pretty-state-machine'
 
-export type ClockModes = 12 | 24
-export type MeasurementsModes = 'freedom' | 'federation'
+import { ClockModes, MeasurementsModes } from 'types/units'
 
 export interface ConfigStoreType {
   clockMode: ClockModes

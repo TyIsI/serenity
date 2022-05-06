@@ -1,4 +1,4 @@
-import { ClockModes, MeasurementsModes } from '../../config/frontend/service/index'
+import { ClockModes, MeasurementsModes } from 'types/units'
 
 export interface SettingsProps { }
 

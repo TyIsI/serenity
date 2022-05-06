@@ -3,8 +3,9 @@ import { Row, Col } from 'react-bootstrap'
 
 import dynamic from 'next/dynamic'
 
-import ConfigServiceInstance, { ClockModes, MeasurementsModes } from '../../config/frontend/service/index'
+import ConfigServiceInstance from 'src/config/frontend/service/index'
 
+import { ClockModes, MeasurementsModes } from 'types/units'
 import { SettingsProps, SettingsState } from './Settings.types'
 
 import styles from './Settings.module.css'
