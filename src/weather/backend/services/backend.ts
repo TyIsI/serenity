@@ -2,7 +2,7 @@ import config from '../../../config/backend/config'
 
 import fetch from 'node-fetch'
 
-import { iWeatherBackendService, Weather, WeatherCache, WeatherCacheEntry } from 'src/weather/types/weather'
+import { iWeatherBackendService, Weather, WeatherCache, WeatherCacheEntry } from 'types/weather'
 
 class WeatherBackendServiceImpl implements iWeatherBackendService {
   cache: WeatherCache
@@ -21,8 +21,8 @@ class WeatherBackendServiceImpl implements iWeatherBackendService {
   }
 
   async getWeather (coords: { latitude: number, longitude: number }): Promise<WeatherCacheEntry> {
-    const lat = parseFloat(coords.latitude.toFixed(3))
-    const lng = parseFloat(coords.longitude.toFixed(3))
+    const lat = parseFloat(coords.latitude.toFixed(2))
+    const lng = parseFloat(coords.longitude.toFixed(2))
     const cacheKey = lat + ',' + lng
 
     if (this.cache[cacheKey] === undefined || this.cache[cacheKey] === null || this.cache[cacheKey].expiry_time < Date.now() || this.cache[cacheKey].weather == null) {

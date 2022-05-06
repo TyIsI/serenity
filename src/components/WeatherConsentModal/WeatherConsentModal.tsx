@@ -16,11 +16,11 @@ const WeatherConsentModal: FC<WeatherConsentModalProps> = ({ consentHandler, sho
           <Modal.Title>Location Consent</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Serenity needs your location to provide you with weather updates. To avoid tracking your specific location, Serenity strips the accuracy from your actual location to a maximum of 3 decimal places. Serenity also proxies the requests through the server to avoid IP address leakage to the weather information provider.
+          Serenity needs your location to provide you with weather updates. To avoid tracking your specific location, Serenity strips the accuracy from your actual location to a maximum of 2 decimal places. Serenity also proxies the requests through the server to avoid IP address leakage to the weather information provider.
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" className="btn-sm" onClick={() => showConsentModalHandler(false)}>
-            Close
+          <Button variant="secondary" className="btn-sm" onClick={() => consentHandler(false)}>
+            Refuse
           </Button>
           <Button variant="primary" className="btn-sm" onClick={() => consentHandler(true)}>
             Agree

@@ -1,22 +1,33 @@
 import stateMachine from 'pretty-state-machine'
-import { Weather } from '../../types/weather'
+import { ConsentTypes } from 'types/consent'
+import { Weather } from 'types/weather'
 
 class FrontendService {
+  locationConsent: ConsentTypes
   enabled: boolean = false
   intervalId: any = 0
   weather: Weather | undefined | unknown
 
-  async updateWeather () {
-    if (!global.window) return
+  constructor () {
+    this.locationConsent = stateMachine.get('locationConsent', 0)
 
-    if (this.enabled === false) return
+    stateMachine.sub('locationConsent', ({ locationConsent }:{ locationConsent: ConsentTypes }) => {
+      this.locationConsent = locationConsent
+    })
+  }
+
+  async updateWeather () {
+    if (this.locationConsent !== 1) return
+    if (!this.enabled) return
+
+    if (!global.window) return
 
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(async (position) => {
         const params = {
           coords: {
-            latitude: parseFloat(parseFloat('' + position.coords.latitude).toFixed(3)),
-            longitude: parseFloat(parseFloat('' + position.coords.longitude).toFixed(3))
+            latitude: parseFloat(parseFloat('' + position.coords.latitude).toFixed(2)),
+            longitude: parseFloat(parseFloat('' + position.coords.longitude).toFixed(2))
           }
         }
 
