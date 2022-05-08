@@ -1,12 +1,6 @@
+const baseConfig = require('./next.config.base.js')
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  images: {
-    domains: ['cdn.weatherapi.com']
-  },
-  exclude: [
-    'templates/**'
-  ]
-}
+const nextConfig = { ...baseConfig }
 
 module.exports = nextConfig
