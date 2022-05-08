@@ -5,4 +5,5 @@ export interface SettingsProps { }
 export interface SettingsState {
   clockMode: ClockModes
   measurementsMode: MeasurementsModes
+  dualMode: boolean
 }

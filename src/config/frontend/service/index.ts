@@ -5,18 +5,26 @@ import { ClockModes, MeasurementsModes } from 'types/units'
 export interface ConfigStoreType {
   clockMode: ClockModes
   measurementsMode: MeasurementsModes
+  dualMode: boolean
   [key: string]: any
+}
+
+const defaultConfig: ConfigStoreType = {
+  clockMode: 24,
+  measurementsMode: 'federation',
+  dualMode: false,
+  ts: Date.now()
 }
 
 export class ConfigService {
   private store: ConfigStoreType
 
   constructor () {
-    this.store = { clockMode: 24, measurementsMode: 'federation', ts: Date.now() }
+    this.store = defaultConfig
   }
 
   refresh () {
-    this.store = stateMachine.get('config', { clockMode: 24, measurementsMode: 'federation', ts: Date.now() })
+    this.store = stateMachine.get('config', defaultConfig)
   }
 
   get (key: string) {
@@ -45,6 +53,14 @@ export class ConfigService {
 
   setMeasurementsMode (measurementsMode: MeasurementsModes) {
     this.set('measurementsMode', measurementsMode)
+  }
+
+  getDualMode () {
+    return this.store.dualMode
+  }
+
+  setDualMode (dualMode: boolean) {
+    this.set('dualMode', dualMode)
   }
 }
 

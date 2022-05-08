@@ -24,7 +24,8 @@ class Settings extends Component<SettingsProps, SettingsState> {
 
     this.state = {
       clockMode: 24,
-      measurementsMode: 'federation'
+      measurementsMode: 'federation',
+      dualMode: false
     }
   }
 
@@ -33,13 +34,15 @@ class Settings extends Component<SettingsProps, SettingsState> {
 
     this.setState({
       clockMode: ConfigServiceInstance.getClockMode(),
-      measurementsMode: ConfigServiceInstance.getMeasurementsMode()
+      measurementsMode: ConfigServiceInstance.getMeasurementsMode(),
+      dualMode: ConfigServiceInstance.getDualMode()
     })
   }
 
   componentDidUpdate (prevProps: SettingsProps, prevState: SettingsState) {
     if (prevState.clockMode !== this.state.clockMode) ConfigServiceInstance.setClockMode(this.state.clockMode)
     if (prevState.measurementsMode !== this.state.measurementsMode) ConfigServiceInstance.setMeasurementsMode(this.state.measurementsMode)
+    if (prevState.dualMode !== this.state.dualMode) ConfigServiceInstance.setDualMode(this.state.dualMode)
   }
 
   setClockMode (clockMode: ClockModes) {
@@ -48,6 +51,10 @@ class Settings extends Component<SettingsProps, SettingsState> {
 
   setMeasurementsMode (measurementsMode: MeasurementsModes) {
     this.setState({ measurementsMode })
+  }
+
+  setDualMode (dualMode: boolean) {
+    this.setState({ dualMode })
   }
 
   render () {
@@ -81,6 +88,22 @@ class Settings extends Component<SettingsProps, SettingsState> {
               offlabel='Freedom'
               onChange={(checked: boolean) => this.setMeasurementsMode(checked ? 'federation' : 'freedom')}
               onstyle="primary"
+              offstyle='danger'
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col className={styles.SettingsLabel}>
+            Dual Mode
+          </Col>
+          <Col>
+            <BootstrapSwitchButton
+              width={150}
+              checked={this.state.dualMode}
+              onlabel='Yes'
+              offlabel='No'
+              onChange={(checked: boolean) => this.setDualMode(checked)}
+              onstyle="success"
               offstyle='danger'
             />
           </Col>

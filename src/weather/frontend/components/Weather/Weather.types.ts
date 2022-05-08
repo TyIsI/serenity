@@ -7,6 +7,7 @@ export interface WeatherState {
   loading: boolean;
   weather: WeatherObject;
   measurementsMode: MeasurementsModes;
+  dualMode: boolean;
   locationConsent: ConsentTypes;
   showConsentModal: boolean;
 }

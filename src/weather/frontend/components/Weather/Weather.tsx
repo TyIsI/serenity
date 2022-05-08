@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import stateMachine from 'pretty-state-machine'
 import { Spinner, OverlayTrigger, Tooltip } from 'react-bootstrap'
+import Image from 'next/image'
 
 import WeatherConsentModal from 'src/components/WeatherConsentModal/WeatherConsentModal'
 
@@ -15,11 +16,13 @@ class Weather extends Component<WeatherProps, WeatherState> {
 
     const weather = stateMachine.get('weather', { weather: { location: { name: '' }, current: { temp_c: 0, temp_f: 0, condition: { text: '', icon: '' } } } })
     const locationConsent = stateMachine.get('locationConsent', 0)
+    const dualMode = stateMachine.get('dualMode', false)
 
     this.state = {
       loading: weather.weather.location.name === '',
       weather: weather,
       measurementsMode: 'federation',
+      dualMode: dualMode,
       locationConsent: locationConsent,
       showConsentModal: locationConsent === 0
     }
@@ -28,11 +31,13 @@ class Weather extends Component<WeatherProps, WeatherState> {
   componentDidMount () {
     stateMachine.sub('weather', this.setState.bind(this))
     stateMachine.sub('measurementsMode', this.setState.bind(this))
+    stateMachine.sub('dualMode', this.setState.bind(this))
   }
 
   componentWillUnmount () {
     stateMachine.unsub('weather', this.setState.bind(this))
     stateMachine.unsub('measurementsMode', this.setState.bind(this))
+    stateMachine.unsub('dualMode', this.setState.bind(this))
   }
 
   componentDidUpdate (prevProps: WeatherProps, prevState: WeatherState) {
@@ -128,10 +133,19 @@ class Weather extends Component<WeatherProps, WeatherState> {
     const temp = this.state.measurementsMode === 'federation' ? weather.current.temp_c : weather.current.temp_f
     const tempUnit = this.state.measurementsMode === 'federation' ? 'C' : 'F'
 
+    let tempString = `${temp}${tempUnit}`
+
+    if (this.state.dualMode) {
+      const temp2 = this.state.measurementsMode === 'federation' ? weather.current.temp_f : weather.current.temp_c
+      const tempUnit2 = this.state.measurementsMode === 'federation' ? 'F' : 'C'
+
+      tempString = `${temp}${tempUnit} (${temp2}${tempUnit2})`
+    }
+
     return (
       <>
       <div className={styles.Weather} onClick={() => this.setShowConsentModal(true)}>
-        <b>{weather.location.name} / {temp}{tempUnit} - {weather.current.condition.text} <img alt={weather.current.condition.text} src={'https:' + weather.current.condition.icon} width={24} height={24} /></b>
+        <b>{weather.location.name} / {tempString} - {weather.current.condition.text} <Image alt={weather.current.condition.text} src={'https:' + weather.current.condition.icon} width={24} height={24} /></b>
         </div>
         <WeatherConsentModal
             consentHandler={(consent) => this.handleLocationConsent(consent)}
