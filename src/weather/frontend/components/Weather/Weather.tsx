@@ -130,13 +130,13 @@ class Weather extends Component<WeatherProps, WeatherState> {
 
     const weather = this.state.weather.weather
 
-    const temp = this.state.measurementsMode === 'federation' ? weather.current.temp_c : weather.current.temp_f
+    const temp = this.state.measurementsMode === 'federation' ? weather.current.temp_c : Math.round(weather.current.temp_f)
     const tempUnit = this.state.measurementsMode === 'federation' ? 'C' : 'F'
 
     let tempString = `${temp}${tempUnit}`
 
     if (this.state.dualMode) {
-      const temp2 = this.state.measurementsMode === 'federation' ? weather.current.temp_f : weather.current.temp_c
+      const temp2 = this.state.measurementsMode === 'federation' ? Math.round(weather.current.temp_f) : weather.current.temp_c
       const tempUnit2 = this.state.measurementsMode === 'federation' ? 'F' : 'C'
 
       tempString = `${temp}${tempUnit} (${temp2}${tempUnit2})`
