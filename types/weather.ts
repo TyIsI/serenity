@@ -55,6 +55,7 @@ export interface WeatherCacheEntry {
   ts: number;
   weather: Weather | undefined | unknown;
   expiry_time: number;
+  instanceId?: string;
 }
 
 export interface WeatherCache {

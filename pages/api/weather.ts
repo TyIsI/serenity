@@ -13,5 +13,5 @@ export default async function handler (
 ) {
   const { ts, weather, expiry_time } = await BackendService.getWeather(req.body.coords)
 
-  res.status(200).json({ ts, weather, expiry_time })
+  res.status(200).json({ ts, weather, expiry_time, instanceId: BackendService.instanceId })
 }

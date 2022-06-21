@@ -5,7 +5,8 @@ import BackendService from 'src/unsplash/backend/services/backend'
 
 type Data = {
   ts: number,
-  photo: object
+  photo: object,
+  instanceId: string
 }
 
 export default async function handler (
@@ -15,5 +16,5 @@ export default async function handler (
   const ts = Date.now()
   const photo = await BackendService.getRandomPhoto()
 
-  res.status(200).json({ ts, photo })
+  res.status(200).json({ ts, photo, instanceId: BackendService.instanceId })
 }
