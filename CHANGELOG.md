@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.11](https://github.com/TyIsI/serenity-dashboard/compare/v0.1.10...v0.1.11) (2022-06-21)
+
+
+### Features
+
+* enhanced backend services ([549b275](https://github.com/TyIsI/serenity-dashboard/commit/549b2757a4c5d5ad9bab48ae892dbb20ad8ba732))
+* improved backend service instanceId handling ([2fbce4d](https://github.com/TyIsI/serenity-dashboard/commit/2fbce4d14dfd4b6312df39905b766b7d29de4abe))
+* new GlobalInstanceManager ([d4b7127](https://github.com/TyIsI/serenity-dashboard/commit/d4b712785ff67a9044760fb7c9992d46ea6b11af))
+* **util:** new getRandomId and getDebugger functions ([aca92c7](https://github.com/TyIsI/serenity-dashboard/commit/aca92c752058241fcc36644038dff062f45451d2))
+* weather dual mode ([3234aa8](https://github.com/TyIsI/serenity-dashboard/commit/3234aa8fb6904279323b513f7df5179770090b23))
+* **weather:** rounded freedom units (to nearest int) ([3c209aa](https://github.com/TyIsI/serenity-dashboard/commit/3c209aa17f8b5b21e6987c1e6f1dbbb173aebb01))
+
+
+### Bug Fixes
+
+* fixed setinterval calls ([8f5233c](https://github.com/TyIsI/serenity-dashboard/commit/8f5233c3e407a6c25381ad670286adeef039e309))
+
 ### [0.1.10](https://github.com/TyIsI/serenity-dashboard/compare/v0.1.9...v0.1.10) (2022-05-06)
 
 
