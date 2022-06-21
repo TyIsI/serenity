@@ -11,7 +11,8 @@ class WeatherBackendServiceImpl implements iWeatherBackendService {
   cache: WeatherCache = {}
   intervalId: any = null
   started: boolean = false
-  debug: any = getDebugger('unsplash-backend').extend(getRandomId())
+  instanceId: string = getRandomId()
+  debug: any = getDebugger('unsplash-backend').extend(this.instanceId)
 
   constructor () {
     this.debug('Creating backend service')
