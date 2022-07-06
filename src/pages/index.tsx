@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
+
 import type { NextPage } from 'next'
-import { Col, Container, Row } from 'react-bootstrap'
+
+import { Container, Row, Col } from 'react-bootstrap'
 import classnames from 'classnames'
 import { Random } from 'unsplash-js/dist/methods/photos/types'
 

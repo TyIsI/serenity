@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 
-import Conditional from 'components/Conditional/Conditional'
+import Conditional from 'src/components/Conditional/Conditional'
 
 import { BookmarkFormProps, BookmarkFormState } from './BookmarkForm.types'
 import Bookmark from '../../classes/Bookmark.class'

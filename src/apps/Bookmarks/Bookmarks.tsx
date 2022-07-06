@@ -12,7 +12,7 @@ import { BookmarksProps } from './Bookmarks.types'
 import Bookmark, { BookmarkData } from './classes/Bookmark.class'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Conditional from 'components/Conditional/Conditional'
+import Conditional from 'src/components/Conditional/Conditional'
 
 import styles from './Bookmarks.module.css'
 

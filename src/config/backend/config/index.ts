@@ -1,4 +1,4 @@
-import { IConfig } from 'types/config'
+import { IConfig } from 'src/types/config'
 
 const config: IConfig = {
   unsplash: {

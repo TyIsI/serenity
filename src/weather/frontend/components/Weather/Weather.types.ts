@@ -1,6 +1,6 @@
-import { MeasurementsModes } from 'types/units'
-import { ConsentTypes } from 'types/consent'
-import { WeatherObject } from 'types/weather'
+import { MeasurementsModes } from 'src/types/units'
+import { ConsentTypes } from 'src/types/consent'
+import { WeatherObject } from 'src/types/weather'
 
 export interface WeatherProps { }
 export interface WeatherState {

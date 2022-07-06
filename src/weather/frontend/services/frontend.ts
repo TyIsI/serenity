@@ -1,6 +1,6 @@
 import stateMachine from 'pretty-state-machine'
-import { ConsentTypes } from 'types/consent'
-import { Weather } from 'types/weather'
+import { ConsentTypes } from 'src/types/consent'
+import { Weather } from 'src/types/weather'
 
 class FrontendService {
   locationConsent: ConsentTypes

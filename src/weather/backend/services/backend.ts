@@ -1,10 +1,10 @@
-import config from '../../../config/backend/config'
+import config from 'src/config/backend/config'
 
 import fetch from 'node-fetch'
 
 import GlobalInstanceManagerInstance from 'src/lib/global-instance-manager'
 
-import { iWeatherBackendService, Weather, WeatherCache, WeatherCacheEntry } from 'types/weather'
+import { iWeatherBackendService, Weather, WeatherCache, WeatherCacheEntry } from 'src/types/weather'
 import { getDebugger, getRandomId } from 'src/lib/util'
 
 class WeatherBackendServiceImpl implements iWeatherBackendService {
