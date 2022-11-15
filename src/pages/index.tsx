@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from 'react'
-
+import { useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 
-import { Container, Row, Col } from 'react-bootstrap'
 import classnames from 'classnames'
+import { Col, Container, Row } from 'react-bootstrap'
 import { Random } from 'unsplash-js/dist/methods/photos/types'
 
-import Clock from 'src/components/Clock/Clock'
-import UnsplashCredit from 'src/unsplash/frontend/components/UnsplashCredit/UnsplashCredit'
-import UnsplashFrontendService from 'src/unsplash/frontend/services/frontend'
-import WeatherFrontendService from 'src/weather/frontend/services/frontend'
-import PhotoTemplate from 'src/unsplash/util/PhotoTemplate'
+import Bookmarks from 'apps/Bookmarks/Bookmarks'
+import Todo from 'apps/Todo/Todo'
 
-import Todo from 'src/apps/Todo/Todo'
-import Bookmarks from 'src/apps/Bookmarks/Bookmarks'
-import SourceCredit from 'src/components/SourceCredit/SourceCredit'
-import Menu from 'src/components/SideMenu/SideMenu'
-import Weather from 'src/weather/frontend/components/Weather/Weather'
+import Clock from 'components/Clock/Clock'
+import Menu from 'components/SideMenu/SideMenu'
+import SourceCredit from 'components/SourceCredit/SourceCredit'
+
+import UnsplashCredit from 'unsplash/frontend/components/UnsplashCredit/UnsplashCredit'
+import UnsplashFrontendService from 'unsplash/frontend/services/frontend'
+import PhotoTemplate from 'unsplash/util/PhotoTemplate'
+
+import Weather from 'weather/frontend/components/Weather/Weather'
+import WeatherFrontendService from 'weather/frontend/services/frontend'
 
 const Serenity: NextPage = () => {
   const [photo, setPhoto] = useState<Random>(PhotoTemplate)

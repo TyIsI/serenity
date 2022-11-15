@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import BackendService from 'src/weather/backend/services/backend'
-import { WeatherCacheEntry } from 'src/types/weather'
+import BackendService from 'weather/backend/services/backend'
+
+import { WeatherCacheEntry } from 'types/weather'
 
 type Data = WeatherCacheEntry
 

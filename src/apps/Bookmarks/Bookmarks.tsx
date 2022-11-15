@@ -1,18 +1,18 @@
-import React, { FC, useState, useEffect, SetStateAction } from 'react'
-
-import { stateMachine } from 'pretty-state-machine'
-import { ListGroup, Row, Col } from 'react-bootstrap'
-import { DragDropContext, Droppable, Draggable, DropResult, ResponderProvided } from 'react-beautiful-dnd'
-
-import { reorder } from 'src/lib/util'
-
-import BookmarkForm from './components/BookmarkForm/BookmarkForm'
-
-import { BookmarksProps } from './Bookmarks.types'
-import Bookmark, { BookmarkData } from './classes/Bookmark.class'
+import { FC, SetStateAction, useEffect, useState } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Conditional from 'src/components/Conditional/Conditional'
+import { stateMachine } from 'pretty-state-machine'
+import { DragDropContext, Draggable, Droppable, DropResult, ResponderProvided } from 'react-beautiful-dnd'
+import { Col, ListGroup, Row } from 'react-bootstrap'
+
+import Conditional from 'components/Conditional/Conditional'
+import BookmarkForm from './components/BookmarkForm/BookmarkForm'
+
+import { reorder } from 'lib/util'
+
+import Bookmark, { BookmarkData } from './classes/Bookmark.class'
+
+import { BookmarksProps } from './Bookmarks.types'
 
 import styles from './Bookmarks.module.css'
 

@@ -1,13 +1,13 @@
-import dynamic from 'next/dynamic'
 import type { AppProps } from 'next/app'
+import dynamic from 'next/dynamic'
 
 import 'bootstrap/dist/css/bootstrap.css'
-import 'src/styles/globals.css'
-import 'src/styles/Bookmarks.css'
+import 'styles/Bookmarks.css'
+import 'styles/globals.css'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-solid-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
+import { fas } from '@fortawesome/free-solid-svg-icons'
 
 library.add(fas)
 library.add(fab)

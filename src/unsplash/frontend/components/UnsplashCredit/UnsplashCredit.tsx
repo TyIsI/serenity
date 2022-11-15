@@ -1,9 +1,10 @@
-import React, { FC, useEffect, useState } from 'react'
-import styles from './UnsplashCredit.module.css'
+import { FC, useEffect, useState } from 'react'
 
-import PhotoTemplate from 'src/unsplash/util/PhotoTemplate'
+import PhotoTemplate from 'unsplash/util/PhotoTemplate'
 
 import { UnsplashCreditProps } from './UnsplashCredit.types'
+
+import styles from './UnsplashCredit.module.css'
 
 const UnsplashCredit: FC<UnsplashCreditProps> = (props: UnsplashCreditProps) => {
   const [photoInfo, updatePhotoInfo] = useState({ ...PhotoTemplate, ...props.photo })

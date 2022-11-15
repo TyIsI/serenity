@@ -1,15 +1,14 @@
 import config from '../../../config/backend/config'
 
-import { createApi } from 'unsplash-js'
 import * as nodeFetch from 'node-fetch'
+import { createApi } from 'unsplash-js'
 
-import GlobalInstanceManagerInstance from 'src/lib/global-instance-manager'
-
-import PhotoTemplate from 'src/unsplash/util/PhotoTemplate'
+import GlobalInstanceManagerInstance from 'lib/global-instance-manager'
+import { getDebugger, getRandomId } from 'lib/util'
 
 import { ApiResponse as UnsplashApiResponse } from 'unsplash-js/dist/helpers/response'
 import { Random as UnsplashRandomPhoto } from 'unsplash-js/dist/methods/photos/types'
-import { getDebugger, getRandomId } from 'src/lib/util'
+import PhotoTemplate from 'unsplash/util/PhotoTemplate'
 
 if (globalThis.fetch == null) {
   // @ts-ignore

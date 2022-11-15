@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import Image from 'next/image'
+import { Component } from 'react'
 
 import stateMachine from 'pretty-state-machine'
-import { Spinner, OverlayTrigger, Tooltip } from 'react-bootstrap'
-import Image from 'next/image'
+import { OverlayTrigger, Spinner, Tooltip } from 'react-bootstrap'
 
-import WeatherConsentModal from 'src/components/WeatherConsentModal/WeatherConsentModal'
+import WeatherConsentModal from 'components/WeatherConsentModal/WeatherConsentModal'
 
 import { WeatherProps, WeatherState } from './Weather.types'
 
@@ -128,7 +128,7 @@ class Weather extends Component<WeatherProps, WeatherState> {
       )
     }
 
-    const weather = this.state.weather.weather
+    const { weather } = this.state.weather
 
     const temp = this.state.measurementsMode === 'federation' ? weather.current.temp_c : Math.round(weather.current.temp_f)
     const tempUnit = this.state.measurementsMode === 'federation' ? 'C' : 'F'

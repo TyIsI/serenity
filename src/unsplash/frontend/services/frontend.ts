@@ -1,9 +1,9 @@
+import { Dispatch, SetStateAction } from 'react'
+
+import stateMachine from 'pretty-state-machine'
 import { Random as UnsplashRandomPhoto } from 'unsplash-js/dist/methods/photos/types'
 
-import { Dispatch, SetStateAction } from 'react'
-import stateMachine from 'pretty-state-machine'
-
-import PhotoTemplate from 'src/unsplash/util/PhotoTemplate'
+import PhotoTemplate from 'unsplash/util/PhotoTemplate'
 
 type IMG = HTMLImageElement | HTMLElement | null
 

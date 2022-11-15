@@ -1,6 +1,6 @@
 import { stateMachine } from 'pretty-state-machine'
 
-import { ClockModes, MeasurementsModes } from 'src/types/units'
+import { ClockModes, MeasurementsModes } from 'types/units'
 
 export interface ConfigStoreType {
   clockMode: ClockModes
