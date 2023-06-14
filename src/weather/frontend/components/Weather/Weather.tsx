@@ -9,6 +9,7 @@ import WeatherConsentModal from 'components/WeatherConsentModal/WeatherConsentMo
 import { WeatherProps, WeatherState } from './Weather.types'
 
 import styles from './Weather.module.css'
+import ErrorBoundaryWrapper from 'components/ErrorBoundaryWrapper/ErrorBoundaryWrapper'
 
 class Weather extends Component<WeatherProps, WeatherState> {
   constructor (props: WeatherProps | Readonly<WeatherProps>) {
@@ -19,7 +20,7 @@ class Weather extends Component<WeatherProps, WeatherState> {
     const dualMode = stateMachine.get('dualMode', false)
 
     this.state = {
-      loading: weather.weather.location.name === '',
+      loading: weather?.weather?.location?.name === '',
       weather: weather,
       measurementsMode: 'federation',
       dualMode: dualMode,
@@ -143,7 +144,7 @@ class Weather extends Component<WeatherProps, WeatherState> {
     }
 
     return (
-      <>
+      <ErrorBoundaryWrapper handle='Weather'>
       <div className={styles.Weather} onClick={() => this.setShowConsentModal(true)}>
         <b>{weather.location.name} / {tempString} - {weather.current.condition.text} <Image alt={weather.current.condition.text} src={'https:' + weather.current.condition.icon} width={24} height={24} /></b>
         </div>
@@ -152,7 +153,7 @@ class Weather extends Component<WeatherProps, WeatherState> {
             showConsentModal={this.state.showConsentModal}
             showConsentModalHandler={(show) => this.setShowConsentModal(show)}
           />
-      </>
+      </ErrorBoundaryWrapper>
     )
   }
 }
