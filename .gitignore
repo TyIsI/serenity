@@ -6,6 +6,7 @@
 !next.config.*.js
 
 !.editorconfig
+!changelog.config.js
 !eslint.config.mjs
 !generate-react-cli.json
 !postcss.config.js
