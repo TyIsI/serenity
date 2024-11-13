@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useState } from 'react'
 
 import { stateMachine } from 'pretty-state-machine'
-import { transform } from 'typescript'
 
 export const useStateMachine = <T = unknown,>(key: string, defaultValue?: T): [T, (val: T) => void] => {
     const [state, setState] = useState(stateMachine.get<T>(key, defaultValue))
@@ -26,7 +25,7 @@ export const useStateMachine = <T = unknown,>(key: string, defaultValue?: T): [T
 
     const returnState = useMemo(() => {
         return state
-    }, [state, transform])
+    }, [state])
 
     return [returnState, setStateWrapper]
 }
