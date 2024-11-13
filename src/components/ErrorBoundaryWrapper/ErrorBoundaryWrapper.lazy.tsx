@@ -1,13 +1,17 @@
-import React, { lazy, Suspense } from 'react'
+'use client'
 
-import { ErrorBoundaryWrapperProps } from './ErrorBoundaryWrapper.types'
+import React, { type FC, lazy, Suspense, type JSX } from 'react'
 
-const LazyErrorBoundaryWrapper = lazy(() => import('./ErrorBoundaryWrapper'))
+import type { ErrorBoundaryWrapperProps } from './ErrorBoundaryWrapper.types'
 
-const ErrorBoundaryWrapper = (props: JSX.IntrinsicAttributes & { children?: React.ReactNode; } & ErrorBoundaryWrapperProps) => (
-  <Suspense fallback={null}>
-    <LazyErrorBoundaryWrapper {...props} />
-  </Suspense>
+const LazyErrorBoundaryWrapper = lazy(async () => await import('./ErrorBoundaryWrapper'))
+
+type LazyProps = JSX.IntrinsicAttributes & { children?: React.ReactNode } & ErrorBoundaryWrapperProps
+
+const ErrorBoundaryWrapper: FC<LazyProps> = (props: LazyProps) => (
+    <Suspense fallback={null}>
+        <LazyErrorBoundaryWrapper {...props} />
+    </Suspense>
 )
 
 export default ErrorBoundaryWrapper

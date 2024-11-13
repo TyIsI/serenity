@@ -1,9 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import SourceCredit from './SourceCredit'
+'use client'
 
-it('It should mount', () => {
-  const div = document.createElement('div')
-  ReactDOM.render(<SourceCredit />, div)
-  ReactDOM.unmountComponentAtNode(div)
+import React from 'react'
+
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
+
+import { SourceCredit } from './SourceCredit'
+
+describe('SourceCredit', () => {
+    it('should mount', () => {
+        render(<SourceCredit />)
+
+        const component = screen.getByTestId('SourceCredit')
+
+        expect(component).toBeTruthy()
+    })
 })

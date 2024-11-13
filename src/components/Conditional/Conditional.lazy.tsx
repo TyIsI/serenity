@@ -1,13 +1,17 @@
-import React, { lazy, Suspense } from 'react'
+'use client'
 
-import { ConditionalProps } from './Conditional.types'
+import React, { type FC, lazy, Suspense, type JSX } from 'react'
 
-const LazyConditional = lazy(() => import('./Conditional'))
+import type { ConditionalProps } from './Conditional.types'
 
-const Conditional = (props: JSX.IntrinsicAttributes & { children?: React.ReactNode; } & ConditionalProps) => (
-  <Suspense fallback={null}>
-    <LazyConditional {...props} />
-  </Suspense>
+const LazyConditional = lazy(async () => await import('./Conditional'))
+
+type LazyProps = JSX.IntrinsicAttributes & { children?: React.ReactNode } & ConditionalProps
+
+const Conditional: FC<LazyProps> = (props: LazyProps) => (
+    <Suspense fallback={null}>
+        <LazyConditional {...props} />
+    </Suspense>
 )
 
 export default Conditional

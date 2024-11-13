@@ -1,5 +1,5 @@
+import type { ReactNode } from 'react'
+
 export interface WeatherConsentModalProps {
-  showConsentModal: boolean;
-  showConsentModalHandler: (show:boolean) => void;
-  consentHandler: (consent: boolean) => void;
+    children?: ReactNode
 }

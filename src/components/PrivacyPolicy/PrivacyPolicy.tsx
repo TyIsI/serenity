@@ -1,55 +1,46 @@
-import stateMachine from 'pretty-state-machine'
-import React, { FC, useEffect, useState } from 'react'
-import { Modal, Button } from 'react-bootstrap'
+'use client'
 
-import { PrivacyPolicyProps } from './PrivacyPolicy.types'
+import type { FC } from 'react'
 
-import styles from './PrivacyPolicy.module.css'
+import type { PrivacyPolicyProps } from './PrivacyPolicy.types'
 
-const PrivacyPolicy: FC<PrivacyPolicyProps> = () => {
-  const [showPrivacyPolicy, setShow] = useState(false)
+import { Modal } from '@/components/Modal/Modal'
 
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+import { useStateMachine } from '@/hooks/useStateMachine'
 
-  useEffect(() => {
-    handleShow()
+export const PrivacyPolicy: FC<PrivacyPolicyProps> = () => {
+    const [showPrivacyPolicy, setShowPrivacyPolicy] = useStateMachine('showPrivacyPolicy', false)
 
-    stateMachine.sub('showPrivacyPolicy', ({ showPrivacyPolicy }:{showPrivacyPolicy: boolean}) => { setShow(showPrivacyPolicy) })
-
-    return () => {
-      stateMachine.unsub('showPrivacyPolicy', ({ showPrivacyPolicy }:{showPrivacyPolicy: boolean}) => { setShow(showPrivacyPolicy) })
+    const handleClose = (): void => {
+        setShowPrivacyPolicy(false)
     }
-  }, [])
 
-  useEffect(() => {
-    stateMachine.pub('showPrivacyPolicy', { showPrivacyPolicy: showPrivacyPolicy })
-  }, [showPrivacyPolicy])
-
-  return (
-    <div className={styles.PrivacyPolicy}>
-      <Modal show={showPrivacyPolicy} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Privacy Policy</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>
-          <p>Serendipity Dashboard is a web application that is not intended to collect any personal information.</p>
-          <p>Please see <a href="https://unsplash.com/privacy">Unsplash&apos;s privacy policy about what they do when you download the images from them.</a></p>
-          <p>The Serenity Dashboard software caches and proxies the requests for image selection that go to Unsplash.</p>
-          <p>Location information gets proxied through the Serenity Dashboard service and is anonymously submitted to <a href="https://weatherapi.com/">weatherapi.com</a> to get your current weather.</p>
-          <p>Outside of that, the only information that is collected within this app is the URL of the page you are on. And that does not get used for anything.</p>
-          <p>This application is hosted on Vercel. So they might see what requests coming in.</p>
-          <p>All other information (todos, bookmarks, etc) are stored locally, and only locally, in your browser.</p>
-        </Modal.Body>
-
-        <Modal.Footer>
-          <Button variant="secondary">Close</Button>
-          <Button variant="primary">Save changes</Button>
-        </Modal.Footer>
-      </Modal>
-    </div>
-  )
+    return (
+        <Modal title={'Privacy Policy'} show={showPrivacyPolicy} onHide={handleClose} closeButton={true}>
+            <div>
+                <p>Serenity Dashboard was written with privacy in mind and intends to collect or use as little any personal information as possible.</p>
+                <p>The images in Serenity Dashboard are sourced from Unsplash.</p>
+                <p>
+                    Please see <a href='https://unsplash.com/privacy'>Unsplash&apos;s privacy policy</a> about what they do when you download the images from
+                    them.
+                </p>
+                <p>On the server side, the Serenity Dashboard software caches and proxies the requests for image selection that go to Unsplash.</p>
+                <p>
+                    Weather information is supplied through <a href='https://weatherapi.com/'>weatherapi.com</a>, but location information is proxied through
+                    the Serenity Dashboard service and is anonymously submitted to to get your current weather based on your GPS location rounded to the nearest
+                    2 decimal positions.
+                    <br />
+                    E.g. 46.5691099,-81.1909967 is converted to 46.57,-81.19
+                </p>
+                <p>
+                    Beyond that, the only information that is collected within this app is the URL of the page you are on. And that does not get used for
+                    anything.
+                </p>
+                <p>This application is hosted on Vercel. So they might see what requests coming in.</p>
+                <p>All other information (tasks, bookmarks, etc) are stored locally, and only locally, in your browser.</p>
+            </div>
+        </Modal>
+    )
 }
 
 export default PrivacyPolicy

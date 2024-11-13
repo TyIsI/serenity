@@ -1,12 +1,12 @@
 const baseConfig = require('./next.config.base.js')
 
 const nextConfig = {
-  ...baseConfig,
-  ...{
-    experimental: {
-      outputStandalone: true
+    ...baseConfig,
+    ...{
+        experimental: {
+            outputStandalone: true
+        }
     }
-  }
 }
 
 module.exports = nextConfig

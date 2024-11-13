@@ -1,10 +1,20 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+'use client'
 
-import ErrorBoundaryWrapper from './ErrorBoundaryWrapper'
+import { render, screen } from '@testing-library/react'
 
-it('It should mount', () => {
-  const div = document.createElement('div')
-  ReactDOM.render(<ErrorBoundaryWrapper />, div)
-  ReactDOM.unmountComponentAtNode(div)
+import '@testing-library/jest-dom'
+import { ErrorBoundaryWrapper } from './ErrorBoundaryWrapper'
+
+describe('ErrorBoundaryWrapper', () => {
+    it('should mount', () => {
+        render(
+            <ErrorBoundaryWrapper data-testid='ErrorBoundaryWrapper' handle={'error-boundary-test'}>
+                <div></div>
+            </ErrorBoundaryWrapper>
+        )
+
+        const component = screen.getByTestId('ErrorBoundaryWrapper')
+
+        expect(component).toBeTruthy()
+    })
 })

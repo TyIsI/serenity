@@ -1,13 +1,17 @@
-import React, { lazy, Suspense } from 'react'
+'use client'
 
-import { SourceCreditProps } from './SourceCredit.types'
+import React, { type FC, lazy, Suspense, type JSX } from 'react'
 
-const LazySourceCredit = lazy(() => import('./SourceCredit'))
+import type { SourceCreditProps } from './SourceCredit.types'
 
-const SourceCredit = (props: JSX.IntrinsicAttributes & { children?: React.ReactNode; } & SourceCreditProps) => (
-  <Suspense fallback={null}>
-    <LazySourceCredit {...props} />
-  </Suspense>
+const LazySourceCredit = lazy(async () => await import('./SourceCredit'))
+
+type LazyProps = JSX.IntrinsicAttributes & { children?: React.ReactNode } & SourceCreditProps
+
+const SourceCredit: FC<LazyProps> = (props: LazyProps) => (
+    <Suspense fallback={null}>
+        <LazySourceCredit {...props} />
+    </Suspense>
 )
 
 export default SourceCredit

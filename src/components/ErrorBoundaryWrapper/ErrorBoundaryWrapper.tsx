@@ -1,32 +1,34 @@
-import React, { Component } from 'react'
+'use client'
 
-import { ErrorBoundaryWrapperProps, ErrorBoundaryWrapperState } from './ErrorBoundaryWrapper.types'
+import { Component, type ReactNode } from 'react'
 
-class ErrorBoundaryWrapper extends Component<ErrorBoundaryWrapperProps, ErrorBoundaryWrapperState> {
-  constructor (props: ErrorBoundaryWrapperProps) {
-    super(props)
+import type { ErrorBoundaryWrapperProps, ErrorBoundaryWrapperState } from './ErrorBoundaryWrapper.types'
 
-    this.state = { hasError: false }
-  }
+export class ErrorBoundaryWrapper extends Component<ErrorBoundaryWrapperProps, ErrorBoundaryWrapperState> {
+    constructor(props: ErrorBoundaryWrapperProps) {
+        super(props)
 
-  static getDerivedStateFromError (error: any) {
-    // Update state so the next render will show the fallback UI.
-    return { hasError: true }
-  }
-
-  componentDidCatch (error: any, errorInfo: any) {
-    // You can also log the error to an error reporting service
-    console.warn(error, errorInfo)
-  }
-
-  render () {
-    if (this.state.hasError) {
-      // You can render any custom fallback UI
-      return <h1>Something went wrong with {this.props.handle}. Please activate your local EMH.</h1>
+        this.state = { hasError: false }
     }
 
-    return this.props.children
-  }
+    static getDerivedStateFromError(_error: unknown): ErrorBoundaryWrapperState {
+        // Update state so the next render will show the fallback UI.
+        return { hasError: true }
+    }
+
+    componentDidCatch(error: unknown, errorInfo: unknown): void {
+        // You can also log the error to an error reporting service
+        console.warn(error, errorInfo)
+    }
+
+    render(): ReactNode {
+        if (this.state.hasError) {
+            // You can render any custom fallback UI
+            return <h1>Something went wrong with {this.props.handle}. Please activate your local EMH.</h1>
+        }
+
+        return this.props.children
+    }
 }
 
 export default ErrorBoundaryWrapper

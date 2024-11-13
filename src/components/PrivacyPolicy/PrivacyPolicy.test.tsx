@@ -1,9 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import PrivacyPolicy from './PrivacyPolicy'
+'use client'
 
-it('It should mount', () => {
-  const div = document.createElement('div')
-  ReactDOM.render(<PrivacyPolicy />, div)
-  ReactDOM.unmountComponentAtNode(div)
+import React from 'react'
+
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
+
+import { PrivacyPolicy } from './PrivacyPolicy'
+
+describe('PrivacyPolicy', () => {
+    it('should mount', () => {
+        render(<PrivacyPolicy />)
+
+        const component = screen.getByTestId('PrivacyPolicy')
+
+        expect(component).toBeTruthy()
+    })
 })

@@ -1,19 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import BackendService from 'unsplash/backend/services/backend'
+import type { APIUnsplashResponseData } from '@/types/api'
 
-type Data = {
-  ts: number,
-  photo: object,
-  instanceId: string
-}
+import BackendService from '@/unsplash/backend/services/backend'
 
-export default async function handler (
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
-  const ts = Date.now()
-  const photo = await BackendService.getRandomPhoto()
+export default async function handler(_req: NextApiRequest, res: NextApiResponse<APIUnsplashResponseData>): Promise<void> {
+    const ts = Date.now()
+    const photo = await BackendService.getRandomPhoto()
 
-  res.status(200).json({ ts, photo, instanceId: BackendService.instanceId })
+    res.status(200).json({ ts, photo, instanceId: BackendService.instanceId })
 }

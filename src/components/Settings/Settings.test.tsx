@@ -1,9 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import Settings from './Settings'
+'use client'
 
-it('It should mount', () => {
-  const div = document.createElement('div')
-  ReactDOM.render(<Settings />, div)
-  ReactDOM.unmountComponentAtNode(div)
+import React from 'react'
+
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
+
+import { Settings } from './Settings'
+
+describe('Settings', () => {
+    it('should mount', () => {
+        render(<Settings />)
+
+        const component = screen.getByTestId('Settings')
+
+        expect(component).toBeTruthy()
+    })
 })

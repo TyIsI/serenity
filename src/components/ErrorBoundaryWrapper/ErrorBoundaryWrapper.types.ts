@@ -1,7 +1,10 @@
+import type { ReactNode } from 'react'
+
 export interface ErrorBoundaryWrapperProps {
-  handle: string
+    children?: ReactNode
+    handle: string
 }
 
-export type ErrorBoundaryWrapperState = {
-  hasError: boolean
+export interface ErrorBoundaryWrapperState {
+    hasError: boolean
 }

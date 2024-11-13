@@ -1,22 +1,41 @@
 {
-  "usesTypeScript": true,
-  "usesCssModule": true,
-  "cssPreprocessor": "css",
-  "testLibrary": "None",
-  "component": {
-    "default": {
-      "path": "src/components",
-      "withStyle": true,
-      "withTest": true,
-      "withStory": false,
-      "withLazy": true
-    },
-    "app": {
-      "path": "src/apps",
-      "withStyle": true,
-      "withTest": true,
-      "withStory": false,
-      "withLazy": true
+    "usesTypeScript": true,
+    "usesCssModule": true,
+    "cssPreprocessor": "css",
+    "testLibrary": "None",
+    "usesStyledComponents": false,
+    "component": {
+        "default": {
+            "path": "src/components",
+            "withLazy": true,
+            "withStory": true,
+            "withStyle": false,
+            "withTest": true,
+            "withTypes": true,
+            "customTemplates": {
+                "component": "src/templates/default/TemplateName.tsx",
+                "lazy": "src/templates/default/TemplateName.lazy.tsx",
+                "story": "src/templates/default/TemplateName.stories.tsx",
+                "style": "src/templates/default/TemplateName.module.css",
+                "test": "src/templates/default/TemplateName.test.tsx",
+                "types": "src/templates/default/TemplateName.types.ts"
+            }
+        },
+        "widget": {
+            "path": "src/widgets",
+            "withLazy": true,
+            "withStory": true,
+            "withStyle": false,
+            "withTest": true,
+            "withTypes": true,
+            "customTemplates": {
+                "component": "src/templates/default/TemplateName.tsx",
+                "lazy": "src/templates/default/TemplateName.lazy.tsx",
+                "story": "src/templates/default/TemplateName.stories.tsx",
+                "style": "src/templates/default/TemplateName.module.css",
+                "test": "src/templates/default/TemplateName.test.tsx",
+                "types": "src/templates/default/TemplateName.types.ts"
+            }
+        }
     }
-  }
 }

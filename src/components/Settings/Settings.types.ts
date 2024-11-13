@@ -1,9 +1,13 @@
-import { ClockModes, MeasurementsModes } from 'types/units'
+import type { ReactNode } from 'react'
 
-export interface SettingsProps { }
+import type { ClockModes, MeasurementsModes } from '@/types/units'
+
+export interface SettingsProps {
+    children?: ReactNode
+}
 
 export interface SettingsState {
-  clockMode: ClockModes
-  measurementsMode: MeasurementsModes
-  dualMode: boolean
+    clockMode: ClockModes
+    measurementsMode: MeasurementsModes
+    dualMode: boolean
 }

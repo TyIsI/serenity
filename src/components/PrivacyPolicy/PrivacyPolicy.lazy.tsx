@@ -1,13 +1,17 @@
-import React, { lazy, Suspense } from 'react'
+'use client'
 
-import { PrivacyPolicyProps } from './PrivacyPolicy.types'
+import React, { type FC, lazy, Suspense, type JSX } from 'react'
 
-const LazyPrivacyPolicy = lazy(() => import('./PrivacyPolicy'))
+import type { PrivacyPolicyProps } from './PrivacyPolicy.types'
 
-const PrivacyPolicy = (props: JSX.IntrinsicAttributes & { children?: React.ReactNode; } & PrivacyPolicyProps) => (
-  <Suspense fallback={null}>
-    <LazyPrivacyPolicy {...props} />
-  </Suspense>
+const LazyPrivacyPolicy = lazy(async () => await import('./PrivacyPolicy'))
+
+type LazyProps = JSX.IntrinsicAttributes & { children?: React.ReactNode } & PrivacyPolicyProps
+
+const PrivacyPolicy: FC<LazyProps> = (props: LazyProps) => (
+    <Suspense fallback={null}>
+        <LazyPrivacyPolicy {...props} />
+    </Suspense>
 )
 
 export default PrivacyPolicy
