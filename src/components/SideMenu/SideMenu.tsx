@@ -1,16 +1,16 @@
-"use client"
+'use client'
 
-import { type FC, useState } from "react"
+import { type FC, useState } from 'react'
 
-import type { SideMenuProps } from "./SideMenu.types"
+import type { SideMenuProps } from './SideMenu.types'
 
-import { faTimes } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { clsx } from "clsx"
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { clsx } from 'clsx'
 
-import { Conditional } from "../Conditional/Conditional"
-import { Settings } from "../Settings/Settings"
-import { SideMenuTab } from "../SideMenuTab/SideMenuTab"
+import { Conditional } from '@/components/Conditional/Conditional'
+import { Settings } from '@/components/Settings/Settings'
+import { SideMenuTab } from '@/components/SideMenuTab/SideMenuTab'
 
 export const SideMenu: FC<SideMenuProps> = () => {
     const [show, setShow] = useState(false)
@@ -31,7 +31,7 @@ export const SideMenu: FC<SideMenuProps> = () => {
             />
 
             <Conditional condition={show}>
-                <div className={clsx("relative z-10", !show && "hidden")} aria-labelledby='slide-over-title'>
+                <div className={clsx('relative z-10', !show && 'hidden')} aria-labelledby='slide-over-title'>
                     <div className='fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity' aria-hidden='true'></div>
 
                     <div className='fixed inset-0 overflow-hidden'>
@@ -47,7 +47,7 @@ export const SideMenu: FC<SideMenuProps> = () => {
                                                     onClick={() => {
                                                         handleClose()
                                                     }}>
-                                                    <FontAwesomeIcon icon={faTimes} size={"lg"} />
+                                                    <FontAwesomeIcon icon={faTimes} size={'lg'} />
                                                 </button>
                                             </div>
                                         </div>
@@ -87,12 +87,12 @@ export const SideMenu: FC<SideMenuProps> = () => {
                                             </div>
                                             <hr />
                                             <div className='my-3 p-2'>
-                                                Imagery powered by{" "}
+                                                Imagery powered by{' '}
                                                 <a href='https://unsplash.com/' title='Unsplash'>
                                                     unsplash.com
                                                 </a>
                                                 <br />
-                                                Weather powered by{" "}
+                                                Weather powered by{' '}
                                                 <a href='https://weatherapi.com/' title='Free Weather API'>
                                                     WeatherAPI.com
                                                 </a>

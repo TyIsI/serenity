@@ -21,12 +21,9 @@ import { Bookmarks } from '@/widgets/Bookmarks/Bookmarks'
 import { QuotesWidget } from '@/widgets/QuotesWidget/QuotesWidget'
 import { TaskList } from '@/widgets/TaskList/TaskList'
 
-export const SerenityDashboard: NextPage = () => {
+const SerenityDashboard: NextPage = () => {
     return (
-        <SWRConfig
-            value={{
-                fetcher
-            }}>
+        <SWRConfig value={{ fetcher }}>
             <ErrorBoundaryWrapper handle='Main'>
                 <UnsplashBackground />
                 <div className='min-w-screen h-full min-h-screen w-full'>
