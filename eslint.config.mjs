@@ -4,6 +4,7 @@ import storybook from 'eslint-plugin-storybook'
 import globals from 'globals'
 
 tsx[0].files.push('src/**/**.ts')
+tsx[0].files.push('.storybook/**/**.ts')
 tsx[0].rules['import/order'] = [
     'error',
     {
