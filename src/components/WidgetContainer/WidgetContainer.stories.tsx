@@ -9,4 +9,4 @@ export default {
     title: 'Component/WidgetContainer'
 }
 
-export const Default: StoryFn<WidgetContainerProps> = () => <WidgetContainer />
+export const Default: StoryFn<WidgetContainerProps> = () => <WidgetContainer widget={''} />

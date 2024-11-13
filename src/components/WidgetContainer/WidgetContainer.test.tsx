@@ -9,7 +9,7 @@ import { WidgetContainer } from './WidgetContainer'
 
 describe('WidgetContainer', () => {
     it('should mount', () => {
-        render(<WidgetContainer />)
+        render(<WidgetContainer widget={''} />)
 
         const component = screen.getByTestId('WidgetContainer')
 
