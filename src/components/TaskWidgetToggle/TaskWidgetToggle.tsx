@@ -6,14 +6,17 @@ import type { TasksWidgetToggleProps } from './TaskWidgetToggle.types'
 
 import { clsx } from 'clsx'
 
+import { useIsReady } from '@/hooks/useIsReady'
 import { useStateMachine } from '@/hooks/useStateMachine'
 
 export const TasksWidgetToggle: FC<TasksWidgetToggleProps> = () => {
     const [showTasksWidget, setTaskWidget] = useStateMachine<boolean>('showTaskWidget', false)
 
+    const isReady = useIsReady()
+
     return (
         <button
-            className={clsx(!showTasksWidget ? 'font-bold' : null)}
+            className={clsx(isReady && !showTasksWidget ? 'font-bold' : null)}
             onClick={() => {
                 setTaskWidget(!showTasksWidget)
             }}>

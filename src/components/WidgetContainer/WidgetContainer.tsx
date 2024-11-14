@@ -6,6 +6,7 @@ import type { WidgetContainerProps } from './WidgetContainer.types'
 
 import { clsx } from 'clsx'
 
+import { useIsReady } from '@/hooks/useIsReady'
 import { useStateMachine } from '@/hooks/useStateMachine'
 
 import { Conditional } from '../Conditional/Conditional'
@@ -13,8 +14,10 @@ import { Conditional } from '../Conditional/Conditional'
 export const WidgetContainer: FC<WidgetContainerProps> = ({ className, widget, children }) => {
     const [showWidget] = useStateMachine<boolean>(`show${widget}`, false)
 
+    const isReady = useIsReady()
+
     return (
-        <Conditional condition={showWidget}>
+        <Conditional condition={isReady && showWidget}>
             <div
                 className={clsx(
                     'transition-500 hover:box-shadow-nav fixed bottom-10 top-10 h-auto w-96 overflow-auto px-3 text-white/25 opacity-50',
