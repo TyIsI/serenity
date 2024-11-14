@@ -1,12 +1,17 @@
-import React, { lazy, Suspense } from 'react'
-import { WeatherConsentModalProps } from './WeatherConsentModal.types'
+'use client'
 
-const LazyWeatherConsentModal = lazy(() => import('./WeatherConsentModal'))
+import React, { type FC, lazy, Suspense, type JSX } from 'react'
 
-const WeatherConsentModal = (props: JSX.IntrinsicAttributes & { children?: React.ReactNode; } & WeatherConsentModalProps) => (
-  <Suspense fallback={null}>
-    <LazyWeatherConsentModal {...props} />
-  </Suspense>
+import type { WeatherConsentModalProps } from './WeatherConsentModal.types'
+
+const LazyWeatherConsentModal = lazy(async () => await import('./WeatherConsentModal'))
+
+type LazyProps = JSX.IntrinsicAttributes & { children?: React.ReactNode } & WeatherConsentModalProps
+
+const WeatherConsentModal: FC<LazyProps> = (props: LazyProps) => (
+    <Suspense fallback={null}>
+        <LazyWeatherConsentModal {...props} />
+    </Suspense>
 )
 
 export default WeatherConsentModal

@@ -1,13 +1,15 @@
-import React, { lazy, Suspense } from 'react'
+'use client'
 
-import { ClockProps } from './Clock.types'
+import React, { type FC, lazy, Suspense, type JSX } from 'react'
 
-const LazyClock = lazy(() => import('./Clock'))
+import type { ClockProps } from './Clock.types'
 
-const Clock = (props: JSX.IntrinsicAttributes & { children?: React.ReactNode; } & ClockProps) => (
-  <Suspense fallback={null}>
-    <LazyClock {...props} />
-  </Suspense>
+const LazyClock = lazy(async () => await import('./Clock'))
+
+const Clock: FC<JSX.IntrinsicAttributes & ClockProps> = (props: JSX.IntrinsicAttributes & ClockProps) => (
+    <Suspense fallback={null}>
+        <LazyClock {...props} />
+    </Suspense>
 )
 
 export default Clock

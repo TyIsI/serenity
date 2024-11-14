@@ -1,9 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import WeatherConsentModal from './WeatherConsentModal'
+'use client'
 
-it('It should mount', () => {
-  const div = document.createElement('div')
-  ReactDOM.render(<WeatherConsentModal showConsentModal={false} showConsentModalHandler={(show: boolean) => console.log('showConsentModalHandler', show)} consentHandler={(consent: boolean) => console.log('consentHandler', consent)} />, div)
-  ReactDOM.unmountComponentAtNode(div)
+import React from 'react'
+
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
+
+import { WeatherConsentModal } from './WeatherConsentModal'
+
+describe('WeatherConsentModal', () => {
+    it('should mount', () => {
+        render(<WeatherConsentModal />)
+
+        const component = screen.getByTestId('WeatherConsentModal')
+
+        expect(component).toBeTruthy()
+    })
 })

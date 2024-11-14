@@ -1,11 +1,17 @@
-import React, { lazy, Suspense } from 'react'
+'use client'
 
-const LazySettings = lazy(() => import('./Settings'))
+import React, { type FC, lazy, Suspense, type JSX } from 'react'
 
-const Settings = (props: JSX.IntrinsicAttributes & { children?: React.ReactNode; }) => (
-  <Suspense fallback={null}>
-    <LazySettings {...props} />
-  </Suspense>
+import type { SettingsProps } from './Settings.types'
+
+const LazySettings = lazy(async () => await import('./Settings'))
+
+type LazyProps = JSX.IntrinsicAttributes & SettingsProps
+
+const Settings: FC<LazyProps> = (props: LazyProps) => (
+    <Suspense fallback={null}>
+        <LazySettings {...props} />
+    </Suspense>
 )
 
 export default Settings

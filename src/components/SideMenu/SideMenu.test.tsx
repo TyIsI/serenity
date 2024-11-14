@@ -1,9 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import SideMenu from './SideMenu'
+'use client'
 
-it('It should mount', () => {
-  const div = document.createElement('div')
-  ReactDOM.render(<SideMenu />, div)
-  ReactDOM.unmountComponentAtNode(div)
+import React from 'react'
+
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
+
+import { SideMenu } from './SideMenu'
+
+describe('SideMenu', () => {
+    it('should mount', () => {
+        render(<SideMenu />)
+
+        const component = screen.getByTestId('SideMenu')
+
+        expect(component).toBeTruthy()
+    })
 })

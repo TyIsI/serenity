@@ -1,90 +1,117 @@
-import config from '../../../config/backend/config'
+import type { Debugger } from 'debug'
 
-import * as nodeFetch from 'node-fetch'
 import { createApi } from 'unsplash-js'
 
-import GlobalInstanceManagerInstance from 'lib/global-instance-manager'
-import { getDebugger, getRandomId } from 'lib/util'
+import GlobalInstanceManagerInstance from '@/lib/global-instance-manager'
+import { getDebugger, getRandomId, normalizeTime } from '@/lib/util'
 
-import { ApiResponse as UnsplashApiResponse } from 'unsplash-js/dist/helpers/response'
-import { Random as UnsplashRandomPhoto } from 'unsplash-js/dist/methods/photos/types'
-import PhotoTemplate from 'unsplash/util/PhotoTemplate'
+import { type UnsplashCollectionPhoto, type UnsplashCollectionPhotos, zUnsplashCollectionPhotosResult } from '@/types/unsplash'
 
-if (globalThis.fetch == null) {
-  // @ts-ignore
-  globalThis.fetch = nodeFetch.default
-}
+import { backendConfig } from '@/config/backend'
 
-class BackendService {
-  unsplash: any
-  photoExpiryTime: number
-  cachedPhoto: any
-  intervalId: any
-  started: boolean = false
-  instanceId: string = getRandomId()
-  debug: any = getDebugger('unsplash-backend').extend(this.instanceId)
+const pageSize = 30
 
-  constructor () {
-    this.debug('Creating backend service')
+class UnsplashBackendServiceImpl {
+    unsplash: ReturnType<typeof createApi>
+    photoExpiryTime: number
+    collectionCacheExpiryTime: number
+    collectionCache: UnsplashCollectionPhotos = []
+    intervalId: NodeJS.Timer | undefined
+    started = false
+    instanceId: string = getRandomId()
+    debug: Debugger = getDebugger('unsplash-backend').extend(this.instanceId)
+    collectionCount: number
 
-    this.unsplash = createApi({
-      accessKey: config.unsplash.access_key
-    })
+    constructor() {
+        this.debug('Creating backend service')
 
-    this.photoExpiryTime = 0
-    this.cachedPhoto = PhotoTemplate
-  }
+        this.unsplash = createApi({
+            accessKey: backendConfig.unsplash.accessKey
+        })
 
-  async getRandomPhoto () {
-    this.debug('Getting random photo')
-
-    await this.refreshPhoto()
-
-    return this.cachedPhoto
-  }
-
-  async refreshPhoto () {
-    this.debug('Refreshing photo')
-
-    if (this.cachedPhoto === null || Date.now() > this.photoExpiryTime) {
-      this.debug('Getting new photo')
-
-      const photoResult: UnsplashApiResponse<UnsplashRandomPhoto | UnsplashRandomPhoto[]> = await this.unsplash.photos.getRandom({
-        orientation: 'landscape',
-        collectionIds: [config.unsplash.collection_id],
-        query: 'orientation=landscape',
-        count: 1
-      })
-
-      this.photoExpiryTime = Date.now() + (config.unsplash.cache_time * 1000 * 60)
-
-      if (photoResult.type !== 'success') {
-        this.debug('Failed to get photo')
-        throw new Error('Unable to get photo from Unsplash')
-      }
-
-      this.cachedPhoto = Array.isArray(photoResult.response) ? photoResult.response[0] : photoResult.response
+        this.photoExpiryTime = 0
+        this.collectionCacheExpiryTime = 0
+        this.collectionCount = 0
     }
-  }
 
-  start () {
-    this.debug('Starting backend service')
+    async getRandomPhoto(): Promise<UnsplashCollectionPhoto> {
+        this.debug('Getting random photo')
 
-    if (this.started) return
-    this.intervalId = setInterval(() => this.refreshPhoto(), (60 / 50) * 60 * 1000)
-    this.started = true
-  }
+        await this.refreshPhotoCollectionCache()
 
-  stop () {
-    this.debug('Stopping backend service')
+        return this.collectionCache[Math.floor(Math.random() * (this.collectionCache.length - 1))]
+    }
 
-    clearInterval(this.intervalId)
-    this.started = false
-  }
+    async refreshPhotoCollectionCache(): Promise<void> {
+        this.debug('Refreshing photo collection cache')
+
+        if (this.collectionCache.length === 0 || (this.collectionCache.length !== this.collectionCount && Date.now() > this.collectionCacheExpiryTime)) {
+            const nextCollectionRequestPage = Math.floor(this.collectionCache.length / pageSize + 1)
+            this.debug('Getting new photo:', nextCollectionRequestPage)
+
+            const collectionResult = await this.unsplash.collections.getPhotos({
+                collectionId: backendConfig.unsplash.collectionId,
+                orientation: 'landscape',
+                page: nextCollectionRequestPage,
+                perPage: pageSize
+            })
+
+            if (collectionResult.type === 'error' || !zUnsplashCollectionPhotosResult.safeParse(collectionResult.response).success) {
+                this.debug('Failed to get photo:')
+                console.error(zUnsplashCollectionPhotosResult.safeParse(collectionResult.response))
+
+                throw new Error('Unable to get photo from Unsplash')
+            }
+
+            this.collectionCache = [
+                ...this.collectionCache,
+                ...(collectionResult.response.results as UnsplashCollectionPhotos)
+            ].reduce<UnsplashCollectionPhotos>((c, p) => {
+                if (c.find((e) => e.id === p.id) == null) c.push(p)
+                return c
+            }, [])
+            this.collectionCount = collectionResult.response.total
+            this.collectionCacheExpiryTime = Date.now() + normalizeTime(backendConfig.unsplash.cacheTime)
+        }
+    }
+
+    start(): void {
+        this.debug('Starting backend service')
+
+        if (this.started) return
+        this.intervalId = setInterval(
+            () => {
+                void this.refreshPhotoCollectionCache()
+            },
+            (60 / 50) * 60 * 1000
+        )
+        this.started = true
+    }
+
+    stop(): void {
+        this.debug('Stopping backend service')
+
+        if (typeof this.intervalId !== 'undefined') {
+            // @ts-expect-error mismatching type
+            clearInterval(this.intervalId)
+            this.intervalId = undefined
+        }
+
+        this.started = false
+    }
 }
 
-const unsplashBackendService = GlobalInstanceManagerInstance.getInstance(BackendService)
+const getInstance = (): UnsplashBackendServiceImpl => {
+    let unsplashBackendServiceInstance = GlobalInstanceManagerInstance.getInstance('UnsplashBackendService') as UnsplashBackendServiceImpl
 
-unsplashBackendService.start()
+    if (typeof unsplashBackendServiceInstance === 'undefined') {
+        unsplashBackendServiceInstance = new UnsplashBackendServiceImpl()
+        GlobalInstanceManagerInstance.saveInstance('UnsplashBackendService', unsplashBackendServiceInstance)
+    }
 
-export default unsplashBackendService
+    unsplashBackendServiceInstance.start()
+
+    return unsplashBackendServiceInstance
+}
+
+export default getInstance()

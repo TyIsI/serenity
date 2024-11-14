@@ -1,0 +1,18 @@
+.Bookmarks {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.BookmarksLinkLeft {
+    text-align: left;
+}
+
+/* inline h-6 w-6 rounded-[0.25rem] border-2 border-gray-300/50 px-3 py-1 */
+.BookmarkMenuButton {
+    border: solid 2px rgb(224 224 224 / 50%);
+    border-radius: 0.25rem;
+    width: 24px;
+    height: 24px;
+    padding: 4px 12px;
+    display: inline;
+}

@@ -1,88 +1,114 @@
-import fetch from 'node-fetch'
+import type { Debugger } from 'debug'
 
-import config from 'config/backend/config'
+import GlobalInstanceManagerInstance from '@/lib/global-instance-manager'
+import { getDebugger, getRandomId, normalizeTime } from '@/lib/util'
 
-import GlobalInstanceManagerInstance from 'lib/global-instance-manager'
-import { getDebugger, getRandomId } from 'lib/util'
+import type { IWeatherBackendService, Weather, WeatherCache, WeatherCacheEntry } from '@/types/weather'
 
-import { iWeatherBackendService, Weather, WeatherCache, WeatherCacheEntry } from 'types/weather'
+import { backendConfig } from '@/config/backend'
 
-class WeatherBackendServiceImpl implements iWeatherBackendService {
-  cache: WeatherCache = {}
-  intervalId: any = null
-  started: boolean = false
-  instanceId: string = getRandomId()
-  debug: any = getDebugger('unsplash-backend').extend(this.instanceId)
+class WeatherBackendServiceImpl implements IWeatherBackendService {
+    cache: WeatherCache = {}
+    intervalId: NodeJS.Timer | undefined
+    started = false
+    instanceId: string = getRandomId()
+    debug: Debugger = getDebugger('unsplash-backend').extend(this.instanceId)
 
-  constructor () {
-    this.debug('Creating backend service')
+    constructor() {
+        this.debug('Creating backend service')
 
-    this.cache = {}
-  }
-
-  async fetchWeather (cacheKey: string): Promise<Weather | undefined | unknown> {
-    this.debug('Fetching weather for ' + cacheKey)
-
-    const url = `https://api.weatherapi.com/v1/current.json?key=${config.weather_api.key}&q=${cacheKey}`
-
-    const response = await fetch(url)
-
-    return await response.json()
-  }
-
-  async getWeather (coords: { latitude: number, longitude: number }): Promise<WeatherCacheEntry> {
-    this.debug('Getting weather for ' + coords.latitude + ',' + coords.longitude)
-
-    const lat = parseFloat(coords.latitude.toFixed(2))
-    const lng = parseFloat(coords.longitude.toFixed(2))
-    const cacheKey = lat + ',' + lng
-
-    if (this.cache[cacheKey] === undefined || this.cache[cacheKey] === null || this.cache[cacheKey].expiry_time < Date.now() || this.cache[cacheKey].weather == null) {
-      this.debug('Fetching weather for ' + cacheKey)
-
-      const weather = await this.fetchWeather(cacheKey)
-
-      const cacheEntry: WeatherCacheEntry = {
-        ts: Date.now(),
-        weather,
-        expiry_time: (Date.now() + (config.weather_api.cache.time * 1000))
-      }
-
-      this.cache[cacheKey] = cacheEntry
+        this.cache = {}
     }
 
-    return this.cache[cacheKey]
-  }
+    async fetchWeather(cacheKey: string): Promise<Weather | undefined> {
+        this.debug('Fetching weather for ' + cacheKey)
 
-  maintenance () {
-    this.debug('Maintenance')
+        const url = `https://api.weatherapi.com/v1/current.json?key=${backendConfig.weatherApi.key}&q=${cacheKey}`
 
-    for (const key in this.cache) {
-      if (this.cache[key].expiry_time < Date.now()) {
-        delete this.cache[key]
-      }
+        const response = await fetch(url)
+
+        return (await response.json()) as Weather
     }
-  }
 
-  start () {
-    this.debug('Starting backend service')
+    async getWeather(coords: { latitude: number; longitude: number }): Promise<WeatherCacheEntry> {
+        this.debug(`Getting weather for ${coords.latitude},${coords.longitude}`)
 
-    if (this.started) return
+        const lat = parseFloat(coords.latitude.toFixed(2))
+        const lng = parseFloat(coords.longitude.toFixed(2))
+        const cacheKey = `${lat},${lng}`
 
-    this.intervalId = setInterval(() => this.maintenance(), 60000)
-    this.started = true
-  }
+        if (
+            !(cacheKey in this.cache) ||
+            typeof this.cache[cacheKey] === 'undefined' ||
+            this.cache[cacheKey].expiryTime < Date.now() ||
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+            this.cache[cacheKey].weather == null
+        ) {
+            this.debug('Fetching weather for ' + cacheKey)
 
-  stop () {
-    this.debug('Stopping backend service')
+            const weather = await this.fetchWeather(cacheKey)
 
-    clearInterval(this.intervalId)
-    this.started = false
-  }
+            if (weather != null) {
+                const cacheEntry: WeatherCacheEntry = {
+                    ...this.cache[cacheKey],
+                    ts: Date.now(),
+                    weather,
+                    expiryTime: Date.now() + normalizeTime(backendConfig.weatherApi.cache.time)
+                }
+
+                this.cache[cacheKey] = cacheEntry
+            } else {
+                this.debug(`Received null weather for cacheKey: [${cacheKey}]`)
+            }
+        }
+
+        return this.cache[cacheKey]
+    }
+
+    maintenance(): void {
+        this.debug('Maintenance')
+
+        for (const key in this.cache) {
+            if (this.cache[key].expiryTime < Date.now()) {
+                // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+                delete this.cache[key]
+            }
+        }
+    }
+
+    start(): void {
+        this.debug('Starting backend service')
+
+        if (this.started) return
+
+        if (this.intervalId != null) this.stop()
+
+        this.intervalId = setInterval(() => {
+            this.maintenance()
+        }, 60000)
+        this.started = true
+    }
+
+    stop(): void {
+        this.debug('Stopping backend service')
+
+        // @ts-expect-error type mismatch
+        if (this.intervalId != null) clearInterval(this.intervalId)
+        this.started = false
+    }
 }
 
-const weatherBackendService = GlobalInstanceManagerInstance.getInstance(WeatherBackendServiceImpl)
+const getInstance = (): WeatherBackendServiceImpl => {
+    let weatherBackendServiceInstance = GlobalInstanceManagerInstance.getInstance('WeatherBackendService') as WeatherBackendServiceImpl | null
 
-weatherBackendService.start()
+    if (weatherBackendServiceInstance == null) {
+        weatherBackendServiceInstance = new WeatherBackendServiceImpl()
+        GlobalInstanceManagerInstance.saveInstance('WeatherBackendService', weatherBackendServiceInstance)
+    }
 
-export default weatherBackendService
+    weatherBackendServiceInstance.start()
+
+    return weatherBackendServiceInstance
+}
+
+export default getInstance()

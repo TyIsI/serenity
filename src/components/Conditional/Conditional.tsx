@@ -1,15 +1,15 @@
-import React, { FC } from 'react'
+'use client'
 
-import { ConditionalProps } from './Conditional.types'
+import type { FC } from 'react'
 
-const Conditional: FC<ConditionalProps> = (props) => {
-  if (props.condition === false) { return null }
+import type { ConditionalProps } from './Conditional.types'
 
-  return (
-    <>
-      {props.children}
-    </>
-  )
+export const Conditional: FC<ConditionalProps> = ({ condition, children }) => {
+    if (!condition) {
+        return null
+    }
+
+    return <>{children}</>
 }
 
 export default Conditional

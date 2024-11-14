@@ -1,0 +1,9 @@
+.Tooltip .TooltipContent {
+    @apply invisible absolute bg-gray-600;
+}
+
+.Tooltip .HasTooltip:hover .TooltipContent {
+    @apply visible;
+
+    z-index: 12345;
+}

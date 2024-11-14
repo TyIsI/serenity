@@ -1,42 +1,26 @@
-declare module globalThis {
-  // eslint-disable-next-line no-var, no-unused-vars
-  var GlobalInstanceManagerInstance: any
+declare global {
+    // eslint-disable-next-line no-var
+    var GlobalInstanceManagerInstance: GlobalInstanceManager // NOSONAR
 }
 
-type ObjectCache = {
-  [key: string]: any
-}
+type ObjectCache = Record<string, object>
 
 class GlobalInstanceManager {
-  _instances: ObjectCache = {}
+    _instances: ObjectCache = {}
 
-  saveInstance (type: any, instance: any): void {
-    if (this._instances[type] == null) {
-      this._instances[type] = instance
-    }
-  }
-
-  getInstance (InstanceType: any): any {
-    if (this._instances[InstanceType] == null) {
-      if (InstanceType.constructor != null) {
-        this._instances[InstanceType] = new InstanceType()
-      } else if (InstanceType.createInstance != null) {
-        this._instances[InstanceType] = InstanceType.createInstance()
-      } else {
-        this._instances[InstanceType] = InstanceType
-      }
+    getInstance(type: string): unknown {
+        return this._instances[type]
     }
 
-    const instance = this._instances[InstanceType]
-
-    if (instance) {
-      return instance
+    saveInstance(type: string, instance: object): void {
+        if (typeof this._instances[type] === 'undefined') {
+            this._instances[type] = instance
+        }
     }
-  }
 }
 
-if (globalThis.GlobalInstanceManagerInstance == null) {
-  globalThis.GlobalInstanceManagerInstance = new GlobalInstanceManager()
+if (!('GlobalInstanceManagerInstance' in globalThis)) {
+    globalThis.GlobalInstanceManagerInstance = new GlobalInstanceManager()
 }
 
 const GlobalInstanceManagerInstance = globalThis.GlobalInstanceManagerInstance

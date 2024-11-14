@@ -1,9 +1,16 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import Clock from './Clock'
+'use client'
 
-it('It should mount', () => {
-  const div = document.createElement('div')
-  ReactDOM.render(<Clock />, div)
-  ReactDOM.unmountComponentAtNode(div)
+import '@testing-library/jest-dom'
+import { render, screen } from '@testing-library/react'
+
+import { Clock } from './Clock'
+
+describe('Clock', () => {
+    it('should mount', () => {
+        render(<Clock />)
+
+        const component = screen.getByTestId('Clock')
+
+        expect(component).toBeTruthy()
+    })
 })

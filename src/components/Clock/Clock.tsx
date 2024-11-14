@@ -1,53 +1,57 @@
-import stateMachine from 'pretty-state-machine'
-import React, { FC, useEffect, useState } from 'react'
+'use client'
 
-import { ClockProps } from './Clock.types'
+import { type FC, useEffect, useState } from 'react'
 
-import styles from './Clock.module.css'
+import type { ClockProps } from './Clock.types'
 
-const timeFormats:any[] = [
-  { locale: 'en-GB', options: { hour: 'numeric', minute: 'numeric', second: 'numeric' } },
-  { locale: 'en-US', options: { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true } }
-]
+import { imperialTimeScale, metricTimeScale } from '@/lib/constants'
 
-const renderTime = (clockMode:number) => {
-  const date = new Date()
+import { useClock24HModeSetting } from '@/hooks/useClock24HModeSetting'
 
-  const { locale, options } = clockMode === 24 ? timeFormats[0] : timeFormats[1]
-
-  return date.toLocaleTimeString(locale, options)
+interface TimeFormat {
+    locale: string
+    options: Intl.DateTimeFormatOptions
 }
 
-const Clock: FC<ClockProps> = () => {
-  const [clockMode, setClockMode] = useState(24)
-  const [clock, setClock] = useState(renderTime(clockMode))
+type TimeFormats = TimeFormat[]
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const setClockModeHandler = (update: { clockMode: number }) => {
-    setClockMode(update.clockMode)
-    setClock(renderTime(update.clockMode))
-  }
+const timeFormats: TimeFormats = [
+    { locale: 'en-GB', options: { hour: 'numeric', minute: 'numeric', second: 'numeric' } },
+    { locale: 'en-US', options: { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true } }
+]
 
-  // @ts-ignore
-  useEffect(() => {
-    stateMachine.sub('clockMode', setClockModeHandler)
+const renderTime = (clockMode: number): string => {
+    const date = new Date()
 
-    return () => stateMachine.unsub('clockMode', setClockModeHandler)
-  }, [setClockModeHandler])
+    const localOpts = clockMode === 24 ? timeFormats[0] : timeFormats[1]
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setClock(renderTime(clockMode))
-    }, 1000)
+    return date.toLocaleTimeString(localOpts.locale, localOpts.options)
+}
 
-    return () => {
-      clearInterval(interval)
-    }
-  })
+export const Clock: FC<ClockProps> = () => {
+    const [isClock24H] = useClock24HModeSetting()
 
-  return (
-    <div className={styles.Clock}><b>{clock}</b></div>
-  )
+    const clockMode = isClock24H ? metricTimeScale : imperialTimeScale
+
+    const [clock, setClock] = useState('00:00:00')
+
+    useEffect(() => {
+        const interval = window.setInterval(() => {
+            setClock(renderTime(clockMode))
+        }, 1000)
+
+        setClock(renderTime(clockMode))
+
+        return () => {
+            clearInterval(interval)
+        }
+    }, [])
+
+    return (
+        <div className='inline min-w-52' data-testid='Clock'>
+            {clock}
+        </div>
+    )
 }
 
 export default Clock
