@@ -94,7 +94,7 @@
             "command": "storybook build"
         },
         "dev": {
-            "command": "next dev --hostname 127.0.0.1 --port 7001",
+            "command": "next dev --hostname 127.0.0.1 --port 7001 --experimental-https",
             "service": true
         },
         "full-dev": {
