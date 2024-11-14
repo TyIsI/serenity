@@ -91,6 +91,7 @@
     "wireit": {
         "build": {
             "dependencies": [
+                "type-check",
                 "lint"
             ],
             "command": "next build"
