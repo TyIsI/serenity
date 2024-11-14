@@ -60,11 +60,17 @@ export const TaskList: FC<TaskListProps> = () => {
     }
 
     const handleRemoveTask = (id: Task['id']): void => {
-        console.log('handleRemoveTask', id)
+        setTaskList(tasklist.filter((t) => t.id !== id))
     }
 
     const handleUpdateTask = (task: Task): void => {
-        console.log('handleUpdateTask', task)
+        setTaskList(
+            tasklist.map((t) => {
+                if (t.id === task.id) t.text = task.text
+
+                return t
+            })
+        )
     }
 
     return (
