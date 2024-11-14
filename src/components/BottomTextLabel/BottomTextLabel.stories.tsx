@@ -9,5 +9,3 @@ export default {
 }
 
 export const Default: StoryFn = () => <BottomTextLabel>BottomTextLabel</BottomTextLabel>
-
-export const RightSide: StoryFn = () => <BottomTextLabel className='right-6'>BottomTextLabel</BottomTextLabel>
