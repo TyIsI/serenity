@@ -15,7 +15,7 @@ const quotes = [
     'Always remember that in the Venn diagram of bears and people, the intersection of smart bears and humans is a lot larger than one might think.',
     'Software developers are in a constant struggle to race the universe in developing better, more foolproof software.',
     "Life is pretty easy. It's the people that make it hard.",
-    "The problem with some people is not that they have a good heart, but that it's beating in THEIR chest.",
+    "The problem with some people is not that they don't have a good heart, but that it's beating in THEIR chest.",
     'Nobody is getting out alive. You might as well do it anyway. Worst case scenario, you get a good story out of it!'
 ]
 
@@ -33,12 +33,14 @@ export const useRandomQuote = (quoteChangeInterval?: number): [string, Dispatch<
             setQuote(getRandomQuote())
         }, quoteChangeInterval)
 
-        setQuote(getRandomQuote())
+        const randomQuote = getRandomQuote()
+
+        setQuote(randomQuote)
 
         return () => {
             clearInterval(interval)
         }
-    })
+    }, [])
 
     return [quote, setQuote]
 }
