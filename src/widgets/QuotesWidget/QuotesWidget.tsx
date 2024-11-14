@@ -9,7 +9,7 @@ import { useRandomQuote } from '@/hooks/useRandomQuote'
 export const QuotesWidget: FC<QuotesWidgetProps> = () => {
     const [quote] = useRandomQuote()
 
-    return <div className='bottom-0 mx-auto min-h-7 max-w-fit text-balance rounded-t-lg bg-black/50 px-2 text-center italic'>{quote}</div>
+    return <div className='mx-auto max-w-fit rounded-t-lg bg-black/50 p-1 px-2 text-center italic'>{quote}</div>
 }
 
 export default QuotesWidget

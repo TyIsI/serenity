@@ -11,7 +11,7 @@ import { BottomTextLabel } from '@/components/BottomTextLabel/BottomTextLabel'
 
 export const SourceCredit: FC<SourceCreditProps> = () => {
     return (
-        <BottomTextLabel className='left-14'>
+        <BottomTextLabel>
             <a href='https://github.com/TyIsI/serenity-dashboard' target={'_blank'} rel='noreferrer'>
                 <FontAwesomeIcon icon={faGithub} size={'lg'} /> <span className='hidden text-blue-500 sm:inline'>Serenity Dashboard</span>
             </a>

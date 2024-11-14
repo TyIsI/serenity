@@ -5,9 +5,11 @@ import type { NextPage } from 'next'
 import { SWRConfig } from 'swr'
 
 import { BookmarkWidgetToggle } from '@/components/BookmarkWidgetToggle/BookmarkWidgetToggle'
+import { BottomTab } from '@/components/BottomTab/BottomTab'
 import { Clock } from '@/components/Clock/Clock'
 import { ErrorBoundaryWrapper } from '@/components/ErrorBoundaryWrapper/ErrorBoundaryWrapper'
 import { SideMenu } from '@/components/SideMenu/SideMenu'
+import { SideMenuToggle } from '@/components/SideMenuToggle/SideMenuToggle'
 import { SourceCredit } from '@/components/SourceCredit/SourceCredit'
 import { TasksWidgetToggle } from '@/components/TaskWidgetToggle/TaskWidgetToggle'
 import { UnsplashBackground } from '@/components/UnsplashBackground/UnsplashBackground'
@@ -26,6 +28,7 @@ const SerenityDashboard: NextPage = () => {
         <SWRConfig value={{ fetcher }}>
             <ErrorBoundaryWrapper handle='Main'>
                 <UnsplashBackground />
+                <SideMenu />
                 <div className='min-w-screen h-full min-h-screen w-full'>
                     <div className='box-shadow-nav fixed left-0 right-0 top-0 flex items-center justify-between bg-black/15 shadow-lg hover:bg-black/35'>
                         <div className='ml-3 basis-1/3 text-left hover:font-bold'>
@@ -57,19 +60,22 @@ const SerenityDashboard: NextPage = () => {
                         </WidgetContainer>
                     </div>
 
-                    <div className='fixed bottom-0 left-0 right-0 flex items-center justify-between'>
-                        <div className='basis-1/4'>
-                            <SideMenu />
+                    <div className='fixed bottom-0 left-0 right-0 flex min-h-24 w-full flex-row'>
+                        <BottomTab className='ml-6 flex-none'>
+                            <SideMenuToggle />
+                        </BottomTab>
+
+                        <BottomTab className='flex-none'>
                             <SourceCredit />
-                        </div>
+                        </BottomTab>
 
-                        <div className='basis-2/4 justify-center'>
+                        <BottomTab className='shrink grow'>
                             <QuotesWidget />
-                        </div>
+                        </BottomTab>
 
-                        <div className='basis-1/4'>
+                        <BottomTab className='flex-none'>
                             <UnsplashCreditWidget />
-                        </div>
+                        </BottomTab>
                     </div>
                 </div>
             </ErrorBoundaryWrapper>

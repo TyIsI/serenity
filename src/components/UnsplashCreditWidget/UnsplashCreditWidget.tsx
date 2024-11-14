@@ -8,15 +8,11 @@ import { BottomTextLabel } from '@/components/BottomTextLabel/BottomTextLabel'
 
 import { useUnsplash } from '@/hooks/useUnsplash'
 
-// import PhotoTemplate from '@/unsplash/util/PhotoTemplate'
-
-// const fallbackPhotoInfo = { links: { html: 'https://unsplash.com' }, user: { first_name: 'John', last_name: 'Doe', links: { html: 'https://unsplash.com' } } }
-
 export const UnsplashCreditWidget: FC<UnsplashCreditWidgetProps> = () => {
     const photo = useUnsplash()
 
     return (
-        <BottomTextLabel className='right-6'>
+        <BottomTextLabel>
             <a href={photo.links.html + '?utm_source=Serenity&utm_medium=referral'} className='text-blue-500'>
                 Photo
             </a>{' '}
