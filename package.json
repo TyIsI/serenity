@@ -13,9 +13,9 @@
         "@fortawesome/react-fontawesome": "0.2.2",
         "@headlessui/react": "2.2.0",
         "@heroicons/react": "2.1.5",
-        "@next/bundle-analyzer": "15.0.2",
+        "@next/bundle-analyzer": "15.0.3",
         "clsx": "2.1.1",
-        "debug": "4.3.6",
+        "debug": "4.3.7",
         "next": "15.0.3",
         "pretty-state-machine": "0.0.10",
         "react": "18.3.1",
@@ -29,16 +29,17 @@
         "zod": "3.23.8"
     },
     "devDependencies": {
-        "@babel/eslint-parser": "7.25.1",
+        "@babel/eslint-parser": "7.25.9",
         "@chromatic-com/storybook": "3.2.2",
-        "@storybook/addon-essentials": "8.4.2",
-        "@storybook/addon-interactions": "8.4.2",
-        "@storybook/addon-links": "8.4.2",
-        "@storybook/addon-onboarding": "8.4.2",
-        "@storybook/blocks": "8.4.2",
-        "@storybook/nextjs": "8.4.2",
-        "@storybook/react": "8.4.2",
-        "@storybook/test": "8.4.2",
+        "@next/eslint-plugin-next": "^15.0.3",
+        "@storybook/addon-essentials": "8.4.4",
+        "@storybook/addon-interactions": "8.4.4",
+        "@storybook/addon-links": "8.4.4",
+        "@storybook/addon-onboarding": "8.4.4",
+        "@storybook/blocks": "8.4.4",
+        "@storybook/nextjs": "8.4.4",
+        "@storybook/react": "8.4.4",
+        "@storybook/test": "8.4.4",
         "@testing-library/react": "16.0.1",
         "@tyisi/config-changelog": "^1.0.1",
         "@tyisi/config-eslint": "4.0.0",
@@ -51,8 +52,8 @@
         "@types/react-dom": "18.3.1",
         "autoprefixer": "10.4.20",
         "eslint": "9.14.0",
-        "eslint-config-next": "15.0.2",
-        "eslint-plugin-jest": "28.8.3",
+        "eslint-config-next": "15.0.3",
+        "eslint-plugin-jest": "28.9.0",
         "eslint-plugin-storybook": "0.11.0",
         "generate-react-cli": "8.4.9",
         "globals": "^15.12.0",
@@ -88,6 +89,9 @@
     },
     "wireit": {
         "build": {
+            "dependencies": [
+                "lint"
+            ],
             "command": "next build"
         },
         "build:storybook": {
@@ -136,5 +140,5 @@
             "service": true
         }
     },
-    "packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee"
+    "packageManager": "pnpm@9.13.1+sha512.5ac37545851c55ec58521b6c285db6f848f93ca70889beb4145f5b40fe234e4ea4faee4dad12ac5c139e494374c65d9c3a6ec9a25954378fa286a250e68d2f20"
 }

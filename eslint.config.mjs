@@ -2,6 +2,12 @@ import tsx from '@tyisi/config-eslint/tsx'
 import jest from 'eslint-plugin-jest'
 import storybook from 'eslint-plugin-storybook'
 import globals from 'globals'
+import eslintPluginNext from '@next/eslint-plugin-next'
+
+tsx[0].plugins['@next/next'] = { rules: eslintPluginNext.rules }
+
+Object.entries(eslintPluginNext.configs.recommended.rules).forEach(([ruleKey, ruleValue]) => (tsx[0].rules[ruleKey] = ruleValue))
+Object.entries(eslintPluginNext.configs['core-web-vitals'].rules).forEach(([ruleKey, ruleValue]) => (tsx[0].rules[ruleKey] = ruleValue))
 
 tsx[0].files.push('src/**/**.ts')
 tsx[0].files.push('.storybook/**/**.ts')
