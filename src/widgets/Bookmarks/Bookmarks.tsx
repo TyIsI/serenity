@@ -39,17 +39,11 @@ export const Bookmarks: FC<BookmarksProps> = () => {
         stateMachine.pub({ bookmarks: bookmarksData })
     }, [bookmarks])
 
-    useEffect(() => {
-        console.debug('newBookmark1', { newBookmark })
-    }, [newBookmark])
-
     const toggleShowNewBookmark = (): void => {
         setShowNewBookmark(!showNewBookmark)
     }
 
     const addBookmarkHandler = (newBookmark: Bookmark): void => {
-        console.debug('Bookmarks addBookmarkHandler')
-
         setNewBookmark(new Bookmark())
         setBookmarks([...bookmarks, newBookmark])
     }
@@ -75,8 +69,6 @@ export const Bookmarks: FC<BookmarksProps> = () => {
     const handleDragEnd = (_event: DragEndEvent): void => {
         setActiveId(null)
     }
-
-    console.debug('newBookmark2', { newBookmark })
 
     return (
         <ErrorBoundaryWrapper handle={'Bookmarks'}>

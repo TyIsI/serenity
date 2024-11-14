@@ -20,8 +20,6 @@ export const UnsplashBackground: FC<UnsplashBackgroundProps> = ({ children }) =>
         return [photo.urls.full, photo.urls.regular, oldPhoto.urls.full, oldPhoto.urls.regular].filter((e) => Boolean(e) && e !== '').map((e) => `url(${e})`)
     }, [photo, oldPhoto])
 
-    console.log('Running UnsplashBackground')
-
     return (
         <>
             <div

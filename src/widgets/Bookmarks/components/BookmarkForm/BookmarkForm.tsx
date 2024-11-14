@@ -53,8 +53,6 @@ export const BookmarkForm: FC<BookmarkFormProps> = ({ bookmark, inlineSubmitButt
     }
 
     const onSubmitHandler = (): void => {
-        console.debug('BookmarkForm onSubmitHandler')
-
         if (_title.length === 0 || _url.length === 0) {
             return
         }
@@ -72,9 +70,6 @@ export const BookmarkForm: FC<BookmarkFormProps> = ({ bookmark, inlineSubmitButt
     const _handleClose = (): void => {
         setShowErrorModal(false)
     }
-
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    console.debug('BookmarkForm', { bookmark, _bookmark })
 
     return (
         <div className='spacious'>
