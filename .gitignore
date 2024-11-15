@@ -1,6 +1,9 @@
 *
 !.gitignore
 
+!.husky/
+!.husky/*
+
 !next-env.d.ts
 !next.config.js
 !next.config.*.js
@@ -9,6 +12,7 @@
 !changelog.config.js
 !eslint.config.mjs
 !generate-react-cli.json
+!justfile
 !postcss.config.js
 !prettier.config.js
 !stylelint.config.js
@@ -130,3 +134,4 @@ src/weather/frontend/assets/weather/64x64/night/389.png
 src/weather/frontend/assets/weather/64x64/night/392.png
 src/weather/frontend/assets/weather/64x64/night/395.png
 src/weather/conditions.json
+.env*.local

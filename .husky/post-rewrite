@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+HOOK="hook-$(basename "$0")"
+
+if [ "$(yq -r '. | keys[]' justfile | grep -w "${HOOK}")" != "" ]; then
+    pnpm exec just "${HOOK}"
+fi
